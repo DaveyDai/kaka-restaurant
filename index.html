@@ -18,9 +18,6 @@
 		<meta name="x5-fullscreen" content="true">
 		<meta name="full-screen" content="yes">		
 		<link rel="stylesheet" href="src/css/style.css">
-		<link rel="stylesheet" href="src/css/common.css">
-		<link rel="stylesheet" href="src/css/memberHome.css">
-		<link rel="stylesheet" href="src/css/shopdetails.css">
 	</head>
 	<style type="text/css">
 	</style>
@@ -31,10 +28,10 @@
 			    <div class="footer" id="footer">
 			    	<div class="ft_nav">
 			        	<ul class="clearfix">
-			                <router-link :to="{name : 'home'}" tag="li"><span>首页</span></router-link>
-			                <router-link :to="{name : 'lifeHome'}" tag="li"><span>生活服务</span></router-link>
+			                <router-link :to="{name : 'homePage'}" tag="li" id="home"><span>首页</span></router-link>
+			                <router-link :to="{name : 'lifeHome'}" tag="li" id="life"><span>菜单</span></router-link>
 			                <router-link :to="{name : 'shoppingHome'}" tag="li" id="shopping"><span>购物车</span><div class="choice-commodityNum" id="choiceCommodityNum" style="display: none;">0</div></router-link>
-			                <router-link :to="{name : 'memberHome'}" tag="li"><span>会员中心</span></router-link>		                
+			                <router-link :to="{name : 'memberHome'}" tag="li" id="memberCenter" ><span>会员中心</span></router-link>		                
 			        	</ul>
 			        </div>
 			    </div>				
@@ -43,7 +40,7 @@
 		<script type="text/javascript">
 			document.getElementsByTagName("html")[0].style.cssText = "font-size: " + 30/750*document.body.offsetWidth + "px;";
 			sessionStorage.setItem("code", location.search.slice(1).split("&")[0].split("=")[1] || "");
-			sessionStorage.setItem("shopid",window.location.href.indexOf("shopid=")!=-1&&window.location.href.split("?")[1].split("=")[1].split("#!")[0]||"shop888");//先获取店铺ID		
+			sessionStorage.setItem("shopid",window.location.href.indexOf("shopid=")!=-1&&window.location.href.split("?")[1].split("=")[1].split("#!")[0]||"shop830412");//先获取店铺IDshop888		
 		</script>
 	    <script src="build/build.js"></script>
 	</body>

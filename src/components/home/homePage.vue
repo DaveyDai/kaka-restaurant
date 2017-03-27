@@ -1,5 +1,5 @@
 <template>
-	<div id="home" style="position: relative;">
+	<div id="homePage" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
 			<header class="header">
 				<div class="hx_banner" id="wrapper_index_head">
@@ -54,7 +54,7 @@
 				</div>
 				<div class="c-hot-hotel">
 					<div class="hot-h" v-for="hotItem in hotProductList" v-on:mousedown="shopDetails(hotItem)" >
-						<div class="hot-h-img"><img src="../../images/home_hot_image2@2x.png"/></div>
+						<div class="hot-h-img"><img v-bind:src="hotItem.image"/></div>
 						<div class="hot-h-name">{{hotItem.name}}</div>
 						<div class="hot-h-price">¥ {{hotItem.price}}/{{hotItem.unit}}</div>
 					</div>
@@ -113,8 +113,16 @@
 	</div>
 </template>
 <script type="text/javascript">
-	require("./home.css");
+	require("./homePage.css");
     var myhScroller = null; // 水平滑动组件对象
+    var menuList = [{"id":"9","module_name":"商品列表","shopid":"shop888","image":"../../images/restaurant/home_shop_list_img@2x.png","module_id":null,"status":"0","is_menu":"2","create_date":null,"modify_date":null,"orders":"1","subtitle":"您的网上微商城"},
+    {"id":"10","module_name":"我的订单","shopid":"shop888","image":"home_mine_order_img@2x.png","module_id":null,"status":"0","is_menu":"2","create_date":null,"modify_date":null,"orders":"1","subtitle":"消费明白"},
+    {"id":"11","module_name":"我要预约","shopid":"shop888","image":"home_mine_book_img@2x.png","module_id":null,"status":"0","is_menu":"2","create_date":null,"modify_date":null,"orders":"1","subtitle":"吃喝玩乐"},
+    {"id":"12","module_name":"地图引导","shopid":"shop888","image":"home_map_img@2x.png","module_id":null,"status":"0","is_menu":"2","create_date":null,"modify_date":null,"orders":"1","subtitle":"地图指引"},
+    {"id":"13","module_name":"七嘴八舌","shopid":"shop888","image":"home_chat_img@2x.png","module_id":null,"status":"0","is_menu":"2","create_date":null,"modify_date":null,"orders":"1","subtitle":"聊聊谈谈"},
+    {"id":"14","module_name":"关于我们","shopid":"shop888","image":"home_about_us_img@2x.png","module_id":null,"status":"0","is_menu":"2","create_date":null,"modify_date":null,"orders":"1","subtitle":"放心消费"},
+    {"id":"15","module_name":"公告栏","shopid":"shop888","image":"home_board_img@2x.png","module_id":null,"status":"0","is_menu":"2","create_date":null,"modify_date":null,"orders":"1","subtitle":"最新公告"},
+    {"id":"16","module_name":"更多分类","shopid":"shop888","image":"home_more@2x.png","module_id":null,"status":"0","is_menu":"2","create_date":null,"modify_date":null,"orders":"1","subtitle":"点击查看"}]
     export default {
         data: function(){
         	return {
@@ -129,12 +137,11 @@
         },    	
         mounted: function () {
 	      	console.log("加载首页...");
-        	var scrollerConHeight = window.innerHeight - document.getElementById("footer").clientHeight;
-			globalMethod.setHscroll("home",scrollerConHeight);
       		//globalMethod.layerUtils.iLoading(true);
             queryScroller(this); //初始化滑动组件
+            this.homeMenuList = menuList
             this.getStoreInfo();
-            this.getHomeMenu();
+//          this.getHomeMenu();
             this.getHotProduct();
             this.getNotice();
         },
@@ -166,7 +173,8 @@
 		        });
 		    },
 		    homeMenuLogo:function(logo){
-		    	return configuration.global.imgPath+logo;
+		    	return "src/images/restaurant/"+logo;
+//		    	return configuration.global.imgPath+logo;
 		    },
 			getHotProduct:function(){
 		         this.$http.post(configuration.global.serverPath + "/api/Product/getHotProduct",{shopid:configuration.global.shopid},{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
@@ -236,8 +244,8 @@
     var initScroller = function(item){
     	
         var scrollOptions = {
-            $wrapper: document.getElementById("wrapper_index_head"),
-            $tabNav: document.getElementById("tag_index_head"), // 导航点 zepto 对象
+            $wrapper: $("#wrapper_index_head"),
+            $tabNav: $("#tag_index_head"), // 导航点 zepto 对象
             autoScroll: true, // 是否是自动滚动，默认 false
             autoTime: 2000, // 自动滚动的间隔时间，单位毫秒，默认 2000
             scrollEndHandler: function () {

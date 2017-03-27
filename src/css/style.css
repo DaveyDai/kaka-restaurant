@@ -158,7 +158,7 @@ section.main.fixed > article{
 	display:block;
 	text-align:center;
 	text-decoration:none;
-	color:#6a6a6a;
+	color:#635157;
 	padding-top:2.5rem;
 	height:2rem;
 	line-height:0.14rem;
@@ -184,39 +184,39 @@ section.main.fixed > article{
     line-height: 1.2rem;
     border-radius: 50%;
     text-align: center;
-    background-color: #ff4b09;
+    background-color: #D5383E;
     color: #fff;
 	font-family:-webkit-body;
 	font-size: 0.67rem;
 }
-/*.ft_nav ul li:nth-child(1) a{
-	background:url(../images/home_tabbar_home_image_selected@2x.png) no-repeat center;
+.ft_nav ul li:nth-child(1) span{
+	background:url(../images/restaurant/home_tabbar_home_image_unselected@2x.png) no-repeat center;
 	background-size: 1.56rem 1.4rem;}
-.ft_nav ul li:nth-child(2) a{
-	background:url(../images/home_tabbar_life_image_selected@2x.png) no-repeat center;
+.ft_nav ul li:nth-child(2) span{
+	background:url(../images/restaurant/home_tabbar_order_image_unselected@2x.png) no-repeat center;
 	background-size: 1.56rem 1.4rem;}
-.ft_nav ul li:nth-child(3) a{
-	background:url(../images/home_tabbar_cart_image_selected@2x.png) no-repeat center;
+.ft_nav ul li:nth-child(3) span{
+	background:url(../images/restaurant/home_tabbar_cart_image_unselected@2x.png) no-repeat center;
 	background-size: 1.56rem 1.4rem;}
-.ft_nav ul li:nth-child(4) a{
-	background:url(../images/home_tabbar_member_image_selected@2x.png) no-repeat center;
+.ft_nav ul li:nth-child(4) span{
+	background:url(../images/restaurant/home_tabbar_member_image_unselected@2x.png) no-repeat center;
 	background-size: 1.56rem 1.4rem;}		
-.ft_nav ul li:nth-child(1) a.active{
-	background:url(../images/home_tabbar_home_image_selected@2x.png) no-repeat center;
+.ft_nav ul li:nth-child(1) span.active{
+	background:url(../images/restaurant/home_tabbar_home_image_selected@2x.png) no-repeat center;
 	background-size: 1.56rem 1.4rem;
-	color:#db9c00;}
-.ft_nav ul li:nth-child(2) a.active{
-	background:url(../images/home_tabbar_store_image_selected@2x.png) no-repeat center;
+	color:#c56423;}
+.ft_nav ul li:nth-child(2) span.active{
+	background:url(../images/restaurant/home_tabbar_order_image_selected@2x.png) no-repeat center;
 	background-size: 1.56rem 1.4rem;
-	color:#db9c00;}
-.ft_nav ul li:nth-child(3) a.active{
-	background:url(../images/home_tabbar_vip_image_selected@2x.png) no-repeat center;
+	color:#c56423;}
+.ft_nav ul li:nth-child(3) span.active{
+	background:url(../images/restaurant/home_tabbar_cart_image_selected@2x.png) no-repeat center;
 	background-size: 1.56rem 1.4rem;
-	color:#db9c00;}
-.ft_nav ul li:nth-child(4) a.active{
-	background:url(../images/home_tabbar_mine_image_selected@2x.png) no-repeat center;
+	color:#c56423;}
+.ft_nav ul li:nth-child(4) span.active{
+	background:url(../images/restaurant/home_tabbar_member_image_selected@2x.png) no-repeat center;
 	background-size: 1.56rem 1.4rem;
-	color:#db9c00;}*/
+	color:#c56423;}
 /*版权说明*/
 .hotel-copyright{
 	width: 100%;
@@ -233,15 +233,19 @@ section.main.fixed > article{
 .commodity-choice{
     position: absolute;
     right: 0;
-    bottom: 0.9333333333333333rem; 
+    bottom: 0; 
+    height: 3rem;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
 }
 .commodity-choice > div{
-	float: left;
-	margin: 0 0.23333333333333334rem;  
+	margin: 0 0.3rem;  
 }
 .commodity-change-j{
-	width: 1.8rem;
-	height: 1.8rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	background: url(../images/shop_decrease@2x.png) no-repeat;
 	background-size: 100%;
@@ -258,25 +262,54 @@ section.main.fixed > article{
 	margin-top: 0.18rem!important;
 }
 .commodity-change-z{
-	width: 1.8rem;
-	height: 1.8rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	background: url(../images/shop_increase@2x.png) no-repeat;
 	background-size: 100%;
 }
-/*购物车状态*/
 .commodity-change-1{
 	position: absolute;
-	bottom: 0.5rem;
-	right: 4.5rem;
+	bottom: 2.4rem;
+	right: 5.5rem;
 	font-size: 1.2rem;
 	color: red;
 	clear: both;
 	font-weight: bold;
+	line-height: 1.2rem;
 	display: none;
+}
+.commodity-choice .move{
+	display: block;
+	animation:myfirst .5s;
+	-webkit-animation:myfirst .5s; 
 }
 .c-add1{
 	right: 0.5rem;
+}
+@keyframes myfirst{
+	from {
+		transform: translateY(0) translateZ(0);
+		-webkit-transform: translateY(0) translateZ(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-2rem) translateZ(0);
+		-webkit-transform: translateY(-2rem) translateZ(0);	
+		opacity: 0;	
+	}
+}
+@-webkit-keyframes myfirst {
+	from {
+		transform: translateY(0) translateZ(0);
+		-webkit-transform: translateY(0) translateZ(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-2rem) translateZ(0);
+		-webkit-transform: translateY(-2rem) translateZ(0);	
+		opacity: 0;	
+	}
 }
 /*分页*/
 .hotel-page{

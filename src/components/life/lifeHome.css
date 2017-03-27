@@ -116,12 +116,14 @@
 .hotel-list ul li .hotel-content-pay{
 	line-height: 1.6666666666666667rem;
 	font-size:0.9333333333333333rem;
-	color: #c56c23;
+	color: #d5383e;
+	width: 50%;
 }
 .hotel-list ul li .hotel-content-integral{
 	line-height: 1.3333333333333333rem;
 	font-size: 0.8rem;
 	color: #989898;
+	width: 50%;
 }
 .hotel-list ul li .hotel-list-change{
 	position: absolute;
@@ -136,13 +138,6 @@
 .hotel-list ul li .hotel-list-change .hotel-change-hot{
 	line-height: 1rem;
 }
-.hotel-list ul li .hotel-change-hot{
-	color: #fff;
-	background-color: #c56c23;
-	border-radius: 25px;
-	padding: 0.17rem 0.5rem;
-	margin-top: 0.18rem!important;
-} 
 .hotel-list ul li .hotel-change-j{
 	color: #fff;
 	background-color: #80ba63;
@@ -167,5 +162,15 @@
 	padding: 0.3333333333333333rem 0.3333333333333333rem;
 	margin: 0 0.16666666666666666rem;
 }
+.hotel-change-hot{
+	display: inline-block;
+	color: #fff;
+	background-color: #D5383E;
+	border-radius: 25px;
+	padding: 0.1rem 0.7rem 0.1rem 0.5rem;
+	text-align: center;
+	margin-left: 1rem;
+} 
+
 
 

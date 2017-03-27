@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 export default(function() {
 	Vue.use(VueRouter);
 	const routes = [{
-		path: '/home/home',
-		name: 'home',
+		path: '/home/homePage',
+		name: 'homePage',
 		meta: { title: "万达广场首页", isLogin: false },
-		component: require('../components/home/home.vue')
+		component: require('../components/home/homePage.vue')
 	}, {
 		path: '/home/aboutOur',
 		name: 'aboutOur',
@@ -128,12 +128,14 @@ export default(function() {
 		meta: { title: "二维码", isLogin: true },
 		component: function(resolve) { require(['../components/memberCenter/twoCode.vue'], resolve) }
 	},{ 
-		path: "*", redirect: '/home/home' //默认首页
+		path: "*", redirect: '/home/homePage' //默认首页
 	}];
 	const router = new VueRouter({ routes: routes });
-//	router.push('/home/home');
 	router.afterEach(function(to, from, next) {
 		console.log('成功导航到: ' + to.name);
+		var footerElem = document.getElementById("footer").getElementsByTagName("span");
+		for(var i=footerElem.length;i--;)footerElem[i].className = ""
+		document.getElementById(to.path.split("/")[1]).getElementsByTagName("span")[0].className = "active";
 		sessionStorage.setItem("pageCode", to.name || "");
 		sessionStorage.setItem("prePageCode", from.name || sessionStorage.getItem("prePageCode") || "");
 		document.getElementById("footer").style.display = !!to.meta.showBottom ? "none" : "block";

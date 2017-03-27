@@ -17,21 +17,20 @@
 			<article class="content">
 				<div class="hotel-list">
 					<ul id="productAll">
-						<li v-for="item in productList" v-on:mousedown="shopDetails(item)" v-bind:id="item.id" >
-							<div class="hotel-lists hotel-list-img"><img v-bind:src="item.image" /></div>
+						<li v-for="item in productList" v-bind:id="item.id" >
+							<div class="hotel-lists hotel-list-img" v-on:mousedown="shopDetails(item)"><img v-bind:src="item.image" /></div>
 							<div class="hotel-lists hotel-list-content">
-								<div class="hotel-content-name">{{item.name}}</div>
-								<div class="hotel-content-pay">¥ {{item.price}}元  / {{item.unit}}</div>
-								<div class="hotel-content-integral">积分         {{item.point}}</div>
+								<div class="hotel-content-name">{{item.name}}<div class="hotel-change-hot" v-if="item.is_hot==1" >火爆</div></div>
+								<div class="hotel-content-pay" v-on:mousedown="shopDetails(item)">¥ {{item.price}}元  / {{item.unit}}</div>
+								<div class="hotel-content-integral" v-on:mousedown="shopDetails(item)">积分         {{item.point}}</div>
 							</div>
-							<div class="hotel-lists hotel-list-change">
+							<div class="commodity-choice">
 								<!--<div class="hotel-change-hot">热销</div>-->
-								<div class="hotel-change-hot" v-if="item.is_hot==1" >火爆</div>
+								<div class="commodity-change-1 c-red1" id="red1" >-1</div>
 								<div class="commodity-change-j" v-on:mousedown.stop="redCommodity(item,$event)" v-bind:style="{display:!!item.num&&'block'||'none'}" ></div>
 								<div class="commodity-change-input commodityNum" v-bind:style="{display:!!item.num&&'block'||'none'}" >{{item.num}}</div>
 								<div class="commodity-change-z" v-on:mousedown.stop="addCommodity(item,$event)" ></div>
-								<div class="commodity-change-1 c-red1">-1</div>
-								<div class="commodity-change-1 c-add1">+1</div>
+								<div class="commodity-change-1 c-add1" id="add1">+1</div>
 							</div>
 						</li>
 					</ul>
@@ -126,14 +125,10 @@
 		    redCommodity:function(item,event){
 		    	var inputElement = event.target.nextElementSibling;
 		    	inputElement.innerText = Number(inputElement.innerText) > 0?Number(inputElement.innerText)-1:0;
-		    	$(event.target).siblings(".c-red1").show().animate({opacity: 0.1,marginBottom:"35px"}, 700, 'linear',function(){
-					$(event.target).siblings(".c-red1").css({"opacity": "1","margin-bottom": "0"});
-					$(event.target).siblings(".c-red1").hide();		    		
-		    	});		    	
 		    	if(inputElement.innerText == 0){
 		    		inputElement.style.display = event.target.style.display ="none";
 		    	}		    	
-				changeLocalStorage(false,item);
+				globalMethod.changeLocalStorage(false,item,"",event.target.previousElementSibling);
 		    },
 		    addCommodity:function(item,event){
 		    	var inputElement = event.target.previousElementSibling;
@@ -141,13 +136,8 @@
 		    		inputElement.style.display = inputElement.previousElementSibling.style.display ="block";
 		    	}
 		    	inputElement.innerText = Number(inputElement.innerText) + 1;
-		    	//+1动画
-		    	$(event.target).siblings(".c-add1").show().animate({opacity: 0.1,marginBottom:"35px"}, 700, 'linear',function(){
-					$(event.target).siblings(".c-add1").css({"opacity": "1","margin-bottom": "0"});
-					$(event.target).siblings(".c-add1").hide();		    		
-		    	});
 		    	//修改购物车状态
-		    	changeLocalStorage(true,item);
+		    	globalMethod.changeLocalStorage(true,item,"",event.target.nextElementSibling);
 		    },
         	categoryChoice:function(item,event){
         		$(event.target).addClass("active").siblings().removeClass("active");
@@ -164,7 +154,10 @@
 		    shopDetails:function(shopItem){
 		    	sessionStorage.setItem("shopItem",JSON.stringify(shopItem));
 		    	this.$router.push({name:'shopdetails',query: {shopDetail:JSON.stringify(shopItem)}});
-		    }        	
+		    },
+		    initChangeNum:function(elem){
+//		    	elem.addEventListener("")
+		    }
         }
     }
 </script>

@@ -37,8 +37,8 @@
 						<div class="bgstyle textcontent dcon_bg" style="padding:0;margin-top:10px;">
 							<div class="dcon_title">商品详情</div>
 							<div class="dcon_detailed">
-								<p><img alt="" src="../../images/1111.jpg"></p>
-								<p><img alt="" src="../../images/1111.jpg"></p>
+								<!--<p><img alt="" src="../../images/1111.jpg"></p>
+								<p><img alt="" src="../../images/1111.jpg"></p>-->
 								<p style="margin-top: 5px;">非常舒适非常舒适非常舒适非常舒适非常舒适非常舒适非常舒适非常舒适</p>
 							</div>
 						</div>

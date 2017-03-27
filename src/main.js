@@ -7,11 +7,7 @@ Vue.use(VueResource);
 window.globalMethod = {};
 globalMethod.iscrollUtils = require("./js/plugins/iscroll/scripts/iscrollUtils.js");
 globalMethod.layerUtils = require("./js/plugins/layer/layer.js");
-globalMethod.setHscroll = function(elem,scrollerConHeight){
-	document.getElementById(elem).style.overflowY = "auto"
-	document.getElementById(elem).style.overflowX = "hidden"
-	document.getElementById(elem).style.height = scrollerConHeight + "px"	
-}
+globalMethod.setHscroll = function(elem,scrollerConHeight){}
 window.configuration = {
 	"global": {
 		"serverPath": "http://wx.szgulu.com/vipyun/public",//http://112.74.18.249:88/vipyun/public/index.php",
@@ -35,22 +31,7 @@ if(code&&!sessionStorage.getItem("token")){
 		} 
 	}, function(response) {});	
 }
-
 var footerElem = document.getElementById("footer").getElementsByTagName("li");
-Vue.http.post(configuration.global.serverPath + "/api/tabbar/getTabbar", { shopid: configuration.global.shopid }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, emulateJSON: true }).then(function(response) {
-	var results = response.data;
-	if(results.code === 200) {
-		for(var i=0,dataLength = results.data.length;i<dataLength;i++){
-			var elements = footerElem[i].getElementsByTagName("span")[0]
-			elements.innerText =  results.data[i].module_name
-			elements.style.background = "url(" + configuration.global.imgPath + results.data[i].image + ") no-repeat center"
-			elements.style.backgroundSize = "1.56rem 1.4rem"
-		}
-	} else {
-		globalMethod.layerUtils.iAlert(results.message || "请求服务器失败");
-	}
-}, function(response) {globalMethod.layerUtils.iAlert("连接服务器失败，请联系管理员");});
-
 for(var i = 0,len=footerElem.length;i<len;i++){
 	footerElem[i].addEventListener("touchstart",function(){
 		this.style.backgroundColor = "#999"
@@ -61,7 +42,7 @@ for(var i = 0,len=footerElem.length;i<len;i++){
 }
 
 //购物车状态全局管理
-window.changeLocalStorage = function(key,item,callback){
+globalMethod.changeLocalStorage = function(key,item,callback,elem){
 	var commodity = {id:Number(item.id),name:item.name,unit:item.unit,price:item.price,point:item.point,num:1};//构建商品
 	var shopCart = JSON.parse(localStorage.getItem("shopCart"))||[];
 	var hasShop = false,commodNum = 0;
@@ -85,6 +66,17 @@ window.changeLocalStorage = function(key,item,callback){
 	choiceElem.innerText = commodNum;
 	choiceElem.style.display = commodNum > 0?"block":"none";
 	if(typeof callback === "function")callback();
+	//+-动画
+	if(typeof elem === "object"){
+		var animfn = function(){
+			elem.classList.remove('move');
+			elem.removeEventListener("animationend",animfn)
+			elem.removeEventListener("webkitAnimationend",animfn)
+		}
+		elem.classList.add("move");
+		elem.addEventListener("animationend",animfn)
+		elem.addEventListener("webkitAnimationend",animfn)
+	}
 }
 //购物车显示重拾
 var comCart = JSON.parse(localStorage.getItem("shopCart"))||[],commNum = 0;

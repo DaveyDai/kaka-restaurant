@@ -8,11 +8,11 @@
 							<div class="information-name">{{item.name}}</div>
 							<div class="information-pice"><span class="infor-p-span">¥ {{item.price}}元/{{item.unit}}</span><span class="infor-j-span">积分    {{item.point}}</span></div>
 						</div>
-						<div class="commodity-choice comm-li-info">
+						<div class="commodity-choice">
+							<div class="commodity-change-1 c-red1">-1</div>
 							<div class="commodity-change-j" v-on:mousedown="redCommodity(item,$event)" ></div>
 							<div class="commodity-change-input">{{item.num}}</div>
 							<div class="commodity-change-z" v-on:mousedown="addCommodity(item,$event)" ></div>		
-							<div class="commodity-change-1 c-red1">-1</div>
 							<div class="commodity-change-1 c-add1">+1</div>							
 						</div>
 					</li>
@@ -94,19 +94,11 @@
                 if (window.history && window.history.pushState)window.history.back();
            	},
 		    redCommodity:function(item,event){
-		    	$(event.target).siblings(".c-red1").show().animate({opacity: 0.1,marginBottom:"35px"}, 500, 'linear',function(){
-					$(event.target).siblings(".c-red1").css({"opacity": "1","margin-bottom": "0"});
-					$(event.target).siblings(".c-red1").hide();		    		
-		    	});
-				changeLocalStorage(false,item,this.initShopping);
+				globalMethod.changeLocalStorage(false,item,this.initShopping,event.target.previousElementSibling);
 		    },
 		    addCommodity:function(item,event){
-		    	$(event.target).siblings(".c-add1").show().animate({opacity: 0.1,marginBottom:"35px"}, 500, 'linear',function(){
-					$(event.target).siblings(".c-add1").css({"opacity": "1","margin-bottom": "0"});
-					$(event.target).siblings(".c-add1").hide();		    		
-		    	});
 		    	//修改购物车状态
-		    	changeLocalStorage(true,item,this.initShopping);
+		    	globalMethod.changeLocalStorage(true,item,this.initShopping,event.target.nextElementSibling);
 		    },
 		    initShopping:function(){
 	            var shopCart = JSON.parse(localStorage.getItem("shopCart"))||[];
