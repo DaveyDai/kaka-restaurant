@@ -1,5 +1,5 @@
 <template>
-	<div id="aboutOur" style="position: relative;">
+	<div id="aboutOur" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;background-color: #fff;">
 		<section class="main fixed">
 			<article class="content">
 				<div class="bgstyle clearfix merchant">
@@ -28,6 +28,7 @@
 	.about-conter {
 	    color: #333;
 	    font-size: 0.8rem;		
+	    padding-left: 1rem;
 	}
 	.about-conter p{
 		text-align: right;
@@ -53,7 +54,17 @@
 	#aboutOur .about-shop-name{
 		margin: 1rem 0;
 	}
-
+	#aboutOur .shopings li{
+		height: 2rem;
+		line-height: 2rem;
+		font-size: 0.8rem;
+		color: #000;
+		margin: 0 1rem;
+		border-bottom: 1px solid #E5E5E5;
+	}
+	#aboutOur .shopings li span{
+		color: #333;
+	}
 </style>
 <script type="text/javascript">
     export default {

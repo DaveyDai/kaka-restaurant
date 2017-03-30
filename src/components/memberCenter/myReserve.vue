@@ -1,40 +1,38 @@
 <template>
-	<div id="myReserve" style="position: relative;">
+	<div id="myReserve" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
 			<article class="content">
-				<!--<div class="bgstyle clearfix"> 请您按照如下要求填写，以便我们留位。 </div>-->
 				<div class="bgstyle clear customer">
-					<dl class="Handler"><dt>预约时间</dt>
+					<dl>
+						<dt>预约时间</dt>
 						<dd id="reserve_time" >
 							<input class="r-time" type="datetime-local" name="" id="dateDefault" v-model="reserveList.reserve_time"/>
 							<span class="select-com"><img src="src/images/shop_down_arrow@2x.png"/></span>
 						</dd>
-						<p id="reserve_timeC" >*此选项为必填项</p>
+						<p id="reserve_timeC" >*请填写预约人数</p>
 					</dl>
 					<dl><dt>预约人数</dt>
-						<dd><input v-model="reserveList.number" class="radius5 inputRes" type="tel" placeholder="填写人数，以便我们安排" maxlength="6"></dd>
-						<p id="numberC" >*此选项为必填项</p>
+						<dd>
+							<input v-model="reserveList.number" class="radius5 inputRes" type="tel" placeholder="填写人数，以便我们安排" maxlength="6">
+						</dd>
+						<p id="numberC" >*请填写预约人数</p>
 					</dl>
-					<dl class="situation"><dt>预订类型</dt>
+					<dl class="situation"><dt>预订包厢</dt>
 						<dd>
 							<select class="r-time" name="reserveType" v-model="reserveList.reserve_id" >
+								<option value="0">大厅</option>
 								<option v-bind:value="item.id" v-for="item in reserveType" v-text="item.name"></option>
 							</select>
 							<span class="select-com"><img src="src/images/shop_down_arrow@2x.png"/></span>							
 						</dd>
-
-						<!--<dd id="resType">
-							<span v-for="item in reserveType" >
-								<input name="bx" type="radio" v-bind:checked="$index==0?'checked':''" v-bind:value="item.id" ><em>{{item.name}}</em></span> 
-						</dd>-->
 					</dl>
 					<dl><dt>您的手机号</dt>
 						<dd><input v-model="reserveList.phone" class="radius5 inputRes" type="tel" name="tel" value="" maxlength="11" datatype="Require" placeholder="填写电话，以便我们联系您"></dd>
-						<p id="phoneC" >*此选项为必填项</p>
+						<p id="phoneC" >*请填写联系手机号</p>
 					</dl>
 					<dl><dt>您的姓名</dt>
 						<dd><input v-model="reserveList.name" class="radius5 inputRes" type="text" name="xm" value="" maxlength="10" datatype="Require" placeholder="在这里输入您的姓名/称呼"></dd>
-						<p id="nameC" >*此选项为必填项</p>
+						<p id="nameC" >*请填写您的姓名</p>
 					</dl>
 					<dl><dt>您的性别</dt>
 						<dd>
@@ -55,8 +53,6 @@
 	</div>	
 </template>
 <script type="text/javascript">
-//	var dataNew = new Date();
-//	var timeD = dataNew.getFullYear() + "-" + (dataNew.getMonth() + 1) + "-" + (dataNew.getDate()+1) + "T14:00:00";
     export default {
         data: function(){
         	return {
@@ -66,7 +62,7 @@
         			number:"",//人数
         			name:"",
         			sex:0,//男：0，女：1
-        			reserve_id:"1",//预订类型
+        			reserve_id:"0",//预订类型
         			reserve_time:"",//预订时间
         			note:"",//备注
         			phone:""//手机号码
@@ -75,11 +71,8 @@
         	}
         },    	
         mounted: function () {
-	      	console.log("加载首页...2014-01-02T11:42");
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height();//页面内容高度
-            $("#myReserve").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
             var dataNew = new Date();
-          	this.reserveList.reserve_time = dataNew.getFullYear() + "-" + this.timeDeta(dataNew.getMonth()+1) + "-" + this.timeDeta(dataNew.getDate()+1) + "T14:00:00";
+          	this.reserveList.reserve_time = dataNew.getFullYear() + "-" + this.timeDeta(dataNew.getMonth()+1) + "-" + this.timeDeta(dataNew.getDate()+1) + "T18:00:00";
             this.reserveInit();
         },
         methods: {
@@ -97,6 +90,7 @@
         	},
         	putReserve:function(){
         		if(this.isCheck()){
+        			this.reserveList.reserve_time = this.reserveList.reserve_time.replace(/T/," ");
 			        this.$http.post(configuration.global.serverPath + "/api/Personal/reserve",this.reserveList,{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
 			         	var results = response.data;
 			         	if(results.code === 200){
@@ -112,23 +106,31 @@
         		}
         	},
         	isCheck:function(){
-        		var isCheck = true;
-        		this.reserveList.reserve_time = this.reserveList.reserve_time.replace(/T/," ");
-        		if(!this.reserveList.reserve_time || !this.reserveList.reserve_time.replace(/\s/g,"").length){
+        		var isCheck = true,resTime = this.reserveList.reserve_time;
+        		resTime = resTime.replace(/T/," ");
+        		if(!resTime || !resTime.replace(/\s/g,"").length){
         			document.getElementById("reserve_timeC").style.display = "block";
         			isCheck = false;
+        		}else{
+        			document.getElementById("reserve_timeC").style.display = "none";
         		}
         		if(!this.reserveList.number || !this.reserveList.number.replace(/\s/g,"").length){
         			document.getElementById("numberC").style.display = "block";
         			isCheck = false;
+        		}else{
+        			document.getElementById("numberC").style.display = "none";
         		}
         		if(!this.reserveList.name || !this.reserveList.name.replace(/\s/g,"").length){
         			document.getElementById("nameC").style.display = "block";
         			isCheck = false;
+        		}else{
+        			document.getElementById("nameC").style.display = "none";
         		}
         		if(!this.reserveList.phone || !this.reserveList.phone.replace(/\s/g,"").length){
         			document.getElementById("phoneC").style.display = "block";
         			isCheck = false;
+        		}else{
+        			document.getElementById("phoneC").style.display = "none";
         		}
         		return isCheck;
         	},
@@ -149,35 +151,70 @@
     }
 </script>
 <style>
-	#myReserve{
-		font-size: 14px;
-	}
 	#myReserve p{
 		display: none;
+		position: absolute;
+		bottom: -0.5rem;
+		left: 0;
 		color: red;
-		padding-left: 10%;
-	}
-	#myReserve .Handler dd{
-		line-height: 38px;
-	}
-	#myReserve .r-time{
-		-moz-appearance:none;
-		-webkit-appearance:none;
-		outline: none;	
-		border: 0;
-		width: 100%;
-		height: 33px;
-		z-index: 999;
-	}
-	#myReserve .Handler dt{
-		height: 45px;
+		font-size: 0.5rem;
+		
 	}
 	#myReserve .customer{
-		margin-top: 0;
-		box-shadow: none;
+		background-color: #fff;
+		font-size: 1rem!important;
 	}
-	#myReserve .customer .beizhushuom{
+	#myReserve .customer dl{
+		height: 2.8rem;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-align-items: center;
+		align-items: center;
+		position: relative;
+	}		
+	#myReserve .customer > dl > dt{
+		display: inline-block;
+		height: 2.8rem;
+		line-height: 2.8rem;
+		color: #000;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		text-align: left;		
+		overflow: hidden;
+		width: 30%;
+		padding:0 1rem;		
+		color: #333;
+	}
+	#myReserve .customer > dl > dd{
+		position: relative;
+		display: inline-block;
+		height: 2.8rem;
+		line-height: 2.8rem;
+		width: 75%;
+		padding-left: 5px;
+	}
+	#myReserve .customer > dl > dd input{
+		height: 2.5rem;
+	}
+	#myReserve select,#myReserve input,#myReserve textarea{
 		border: 0;
+		-webkit-appearance: none;
+		outline: none;		
+		width: 85%;
+		height: 2.5rem;
+		font-size: 1rem;
+		color: #333;
+	}
+	#myReserve select{
+		width: 100%;
+		background-color: #fff;
+	}
+	#myReserve .r-time{
+		width: 100%;
+		background-color: #fff;
+	}
+	#myReserve .customer dl.beizhushuom,#myReserve .customer dl.beizhushuom dt,#myReserve .customer dl.beizhushuom dd,#myReserve .customer dl.beizhushuom dd textarea{
+		height: 9rem;
 	}
 	.select-com{
 	    position: absolute;
@@ -190,10 +227,5 @@
 		width: 0.8333333333333334rem;
 		height: 0.4666666666666667rem;
 	}
-	#reserve_time{
-		padding-top: 2px;
-	}
-	input,textarea,select{
-		font-size:14px;
-	}
+	
 </style>

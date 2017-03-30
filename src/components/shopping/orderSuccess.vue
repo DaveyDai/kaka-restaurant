@@ -1,10 +1,11 @@
 <template>
-	<div id="orderSuccess" style="position: relative;">
+	<div id="orderSuccess" style="position: relative;height:calc(100vh);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
 			<article class="content">
 				<div class="order-ok-img"><img src="../../images/shop_success@2x.png"/><div>恭喜您，下单成功</div></div>
 				<div class="order-cz-back">
-					<router-link :to="{name:'orderAll'}" tag="div" class="look-order">查看订单</router-link><router-link :to="{name : 'home'}" tag="div" class="shop-home-page">店铺主页</router-link>
+					<router-link :to="{name:'orderAll'}" tag="div" class="look-order look-that">查看订单</router-link>
+					<router-link :to="{name:'homePage'}" tag="div" class="look-order">店铺主页</router-link>
 				</div>
 			</article>				
 		</section>
@@ -39,13 +40,18 @@
 		width: auto;
 		height: 2.6666666666666665rem;
 		line-height: 2.6666666666666665rem;
-		border-radius:10px;
+		border-radius:1.3rem;
 		border:1px solid #d0d0d0;
 	}
 	.order-cz-back .look-order{
 		background-color: #efefef;
-		margin: 0 0.5666666666666667rem 0 2.033333333333333rem;
+		margin: 0 1rem;
 		padding: 0 2.6666666666666665rem;
+	}
+	.order-cz-back .look-that{
+		background-color: #F7353C;
+		color: #fff;
+		border: 1px solid #F7353C;
 	}
 	.order-cz-back .shop-home-page{
 		background-color: #C94E3F;
@@ -56,9 +62,6 @@
 <script type="text/javascript">
     export default {
         mounted: function () {
-	      	console.log("下单成功");
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height();//页面内容高度
-            $("#orderSuccess").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
         }
     }
 </script>

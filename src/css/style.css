@@ -1,38 +1,31 @@
 @charset "utf-8";
 html {
-    overflow-y: hidden;
+    width: 100%;
+    height: 100%;
+	margin: 0;
+	padding: 0;
     background-color: #ebebeb;
+    overflow-y:hidden ;
+    overflow-x: hidden;
 }
 body {
     position: relative;
-    overflow-y: visible !important;
-    -webkit-touch-callout: none;
+    width: 100%;
+    height: 100%;    
     -webkit-user-select: none;
     -moz-user-select: moz-none;
     user-select: none;
-    -webkit-overflow-scrolling: touch;
-}
-body * {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    /* Firefox */
-    -webkit-box-sizing: border-box;
-    /* Safari */
-}
-html {
-    font-size: 15px;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-body {
-    /*font-size: 0.14rem;*/
-    line-height: 1.8;
-    font-family: Hiragino Sans GB,Helvetica,STHeiti STXihei,Microsoft YaHei,Arial;
+    font-family: Hiragino Sans GB,Arial,Helvetica,\\5B8B\4F53,sans-serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     color: #000;
+}
+*{
+    -webkit-tap-highlight-color: transparent;
+    -ms-touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
 }
 /** html4 reset **/
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
@@ -59,6 +52,48 @@ header, footer, section, nav, menu, details, hgroup, figure, figcaption, article
     padding: 0;
     display: block;
 }
+#app{
+	-webkit-overflow-scrolling: touch;
+}
+.scroll-position{
+	width: 100%;
+	height: 1px;
+}
+section.main {
+    position: relative;
+    z-index: 100;
+}
+section.main.fixed {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+section.main.fixed > article{
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    height: 100%;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	-ms-perspective: 1000;
+	perspective: 1000;
+}
 ::-moz-placeholder {
     color: #ccc;
 }
@@ -80,56 +115,6 @@ a:hover {
     font-size: 0;
     height: 0;
     visibility: hidden;
-}
-.clearfix {
-    zoom:1;}
-
-/* 布局grid */
-#afui,
-#content,
-.page{
-	height:100%;
-	width:100%;}
-section.main {
-    position: relative;
-    z-index: 100;
-}
-section.main.fixed {
-	-webkit-overflow-scrolling: touch;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    box-orient: vertical;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    /*background-color: #ebebeb;*/
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-}
-section.main.fixed > article{
-    -moz-box-flex: 1;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    flex: 1;
-    /*overflow-x: hidden;
-    overflow-y: auto;*/
-    height: 100%;
-    /*background-color: #ececec;*/
-    /*-webkit-overflow-scrolling: auto;*/
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-ms-backface-visibility: hidden;
-	backface-visibility: hidden;
-	-webkit-perspective: 1000;
-	-moz-perspective: 1000;
-	-ms-perspective: 1000;
-	perspective: 1000;
 }
 /*底部导航栏*/	
 .footer{
@@ -352,6 +337,7 @@ section.main.fixed > article{
 .account{
     height: 5rem;
     text-align: center;	
+    margin-top: 2.5rem;
 }
 .account-btn{
     width: 90%;
@@ -359,50 +345,9 @@ section.main.fixed > article{
     line-height: 2.67rem;		
     font-size: 1.1rem;
     color: #fff;
-    background-color: #14B6F5;
+    background-color: #f7353c;
     border-radius: 10px;
     margin-left: 5%;
-    margin-top: 2.5rem;
-}
-/*引入样式*/
-.customer dt {
-	margin-right: -100%;
-	float: left;
-	width: 80px;
-	color: #000;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	text-align: right;
-	height: 43px;
-	line-height: 43px;
-	margin: 1px -100% 0px 0;
-	overflow: hidden;
-	padding-right: 5px;
-}
-.customer dd .inputRes{
-	height: 33px;
-	width: 90%;
-	border: 0
-}
-.customer .borderstyle {
-	width: 95%;
-	color: #666;
-	height: 33px
-}
-.customer textarea {
-	width: 90%;
-	height: 100px
-}
-.customer dd {
-	margin-left: 90px;
-	padding: 5px 0 5px 5px;
-}
-.situation em {
-	padding: 0 10px 0 2px
-}
-.express_ajax {
-	background: #fff;
-	padding-bottom: 10px
 }
 /*个人资料*/
 .car_labse>select {

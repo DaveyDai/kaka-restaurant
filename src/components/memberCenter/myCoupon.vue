@@ -1,11 +1,14 @@
 <template>
-	<div id="myCoupon" style="position: relative;">
+	<div id="myCoupon" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
 			<article class="content">
-				<div class="myReser-title">
-					<div class="myReser-explant"><span class="myRescon-explant-me">优惠券</span><span>我的优惠券</span></div>
-				</div>
-				<div class="mycoupon-conter">
+			   <div class="nav">
+			       <ul>
+			           <li id="couponshop" class="active" @click="changeCoupon($event)">商家劵</li>
+			           <li id="couponme" class="" @click="changeCoupon($event)" >我的优惠劵</li>
+			       </ul>
+			   </div>				
+				<div class="mycoupon-conter" style="display: none;">
 					<li>
 						<div class="mycoupon-tr coupon-center">
 							<div class="mycoupon-td">
@@ -46,47 +49,41 @@
 						<div class="mycoupon-tr coupon-time">有效期至：2017年2月22日</div>
 					</li>
 				</div>
-				<div class="myReser-conter-no" style="display: none;">
-					<div class="myRescon-no">商家未发布优惠券，留言给商家看看有木有</div><div class="myRescon-gotor">发布留言</div>
+				<div class="myCoupon-conter-no" style="display: block;">
+					<div class="content">
+						<ul class="">
+							<li>
+								<img src="../../images/restaurant/none_coupons_img@2x.png" alt="" />
+								<p>该商家未发布优惠劵~呜...呜...留言给商家看看有木有</p>
+							</li>
+						</ul>
+					</div>
+					<div class="fabu"><span class="btn" v-on:mousedown="gomesses()">发布留言</span></div>				
 				</div>			
 			</article>	
 		</section>
 	</div>
 </template>
+<script type="text/javascript">
+    export default {
+        data: function(){
+        	return {
+        	}
+        },    	
+        mounted: function () {
+        },
+        methods: {
+            gomesses: function () {
+            	this.$router.push({ name: "messageboard" });
+            },
+            changeCoupon:function(event){
+            	document.getElementById("couponme").className = document.getElementById("couponshop").className = "";
+            	event.target.className = "active";
+            }
+        }
+    }
+</script>
 <style>
-	.myReser-title{
-		width: 100%;
-		height: 3.3333333333333335rem;
-		text-align: center;
-		background-color: #FFFFFF;
-		border-bottom: 1px solid #E5E5E5;
-	}
-	.myReser-title .myReser-explant{
-		position: relative;
-		top: 0.6666666666666666rem;
-		left: 30%;
-		width: 40%;
-		height: 2rem;
-		line-height: 2rem;
-		font-size: 0.7333333333333333rem;
-		border: 2px solid #ff5102;
-		border-radius: 30px;
-	}
-	.myReser-title .myReser-explant > span{
-		display: inline-block;
-		width: 50%;
-		padding: 0 0.3333333333333333rem;
-	}
-	.myReser-title .myReser-explant .myRescon-explant-me{
-		position: relative;
-		top: -2px;
-		left: -1px;
-		background-color: #ff5102;
-		color: #fff;
-		border-top-left-radius:1rem;
-		border-bottom-left-radius:1rem;
-		height: 1.9333333333333333rem;
-	}
 	.mycoupon-conter li{
 		display: table;
 		margin: 0.6666666666666666rem 7% 0 7%;
@@ -137,45 +134,63 @@
 	    color: #999;
 	    padding-left: 0.8333333333333334rem;		
 	}
-	.myReser-conter-no{
-		width: 100%;
-		height: 50rem;
-		text-align: center;
-		font-size: 0.9333333333333333rem;
-		background-color: #fff;
+	.nav{
+	    width:100%;
+	    height:3rem;
+	    background-color: #fff;
 	}
-	.myReser-conter-no .myRescon-no{
-		padding-top: 18%;
+	.nav>ul{
+	    height:3rem;
+	    display:-webkit-flex;
+	    display:flex;
 	}
-	.myReser-conter-no .myRescon-gotor{
-		position: relative;
-		left: 35%;
-		margin-top:0.3333333333333333rem ;
-		width: 30%;
-		border:1px solid red;
-		color: red;
-		border-radius: 5px;
-		padding: 0.4rem 0;
+	.nav>ul>li{
+	    text-align:center;
+	    height:3rem;
+	    line-height:3rem;
+	    border-bottom:2px solid gainsboro;
+	    -webkit-flex:1;
+	    flex:1;
 	}
+	.nav > ul > li.active{
+		color: #ff5102;
+	    border-bottom:2px solid #ff5102;
+	}
+	.myCoupon-conter-no .content{
+	    width:100%;
+	    margin:0px auto;
+	}
+	.content>ul{
+	
+	}
+	.myCoupon-conter-no .content>ul>li{
+	    text-align:center;
+	    padding-top:2.966666666666667rem;
+	}
+	.myCoupon-conter-no .content>ul>li>img{
+	    width:7.9rem;
+	    height:8.4rem;
+	}
+	.myCoupon-conter-no .content>ul>li>p{
+	    font-size:0.9333333333333333rem;
+	    color:#000000;
+	    padding-top:2.2666666666666666rem;
+	}
+	.myCoupon-conter-no .fabu{
+	    width:100%;
+	    height: 2.1rem;
+	    text-align: center;
+	    margin-top: 2rem;
+	}
+	.myCoupon-conter-no .fabu .btn{
+		display: inline-block;
+	    height:2.1rem;
+	    line-height: 2.1rem;
+	    font-size:0.9333333333333333rem;
+	    color:#ff5102;
+	    border:1px solid #ff5102;
+	    border-radius:4px;
+	    padding: 0 1rem;
+	}	
 </style>
-<script type="text/javascript">
-    export default {
-        data: function(){
-        	return {
-        	}
-        },    	
-        mounted: function () {
-	      	console.log("加载首页...");
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height();//页面内容高度
-            $("#myCoupon").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
-        },
-        methods: {
-            backPage: function () {
-            	globalMethod.layerUtils.iAlert("正在开发，敬请期待...");
-//              if (window.history && window.history.pushState) {
-//                  window.history.back();
-//              }
-           }
-        }
-    }
-</script>
+

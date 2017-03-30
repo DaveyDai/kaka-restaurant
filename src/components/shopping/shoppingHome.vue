@@ -1,7 +1,7 @@
 <template>
 	<div id="shoppingHome" style="position: relative;">
 		<section class="main fixed" id="has_shopping">
-			<article class="content">
+			<article class="content" style="position: relative;height:calc(100vh - 6.26rem);overflow-x: hidden;overflow-y: auto;">
 				<div class="shoping-commoditys">
 					<li v-for="item in shopOrder.order" >
 						<div class="commodity-information comm-li-info">
@@ -36,9 +36,10 @@
 				</div>
 				<div class="order-information">
 					<div class="pice-mode-n o-details-n"><span class="pay-tips"></span><span class="pay-tips-name">订单备注</span></div>
-					<div class="o-room-infor"><span>房间号*</span><input type="tel" placeholder="在此输入房间号*" maxlength="8" v-model="shopOrder.room_id" /></div>
-					<div class="o-room-infor"><span>称呼</span><input type="text" placeholder="在此输入称呼" maxlength="20" v-model="shopOrder.name" /></div>
+					<div class="o-room-infor"><span>店内桌号</span><input type="tel" placeholder="在此输入桌号*" maxlength="8" v-model="shopOrder.room_id" /></div>
+					<div class="o-room-infor"><span>配送地址</span><input type="tel" placeholder="如需配送请填写*" maxlength="80" v-model="shopOrder.address" /></div>
 					<div class="o-room-infor"><span>电话</span><input type="tel" placeholder="在此输入电话" maxlength="11" v-model="shopOrder.phone" /></div>
+					<div class="o-room-infor"><span>称呼</span><input type="text" placeholder="在此输入称呼" maxlength="20" v-model="shopOrder.name" /></div>
 					<div class="o-room-beizhu"><span>备注说明</span><div><textarea name="" rows="" cols="" placeholder="在此输入备注，如。。。。。" v-model="shopOrder.remark" ></textarea></div></div>
 				</div>
 			</article>
@@ -50,12 +51,16 @@
 			</div>	
 			<!--</div>-->
 		</section>
-		<div id="no_shopping" style="display: none;">
-			<div class="no-shopping">
-				<p>您的购物车还是空空如也，赶紧行动哦！！您可以</p>
-				<div v-on:mousedown="goShop()" >点击此处开始选购下单</div>
-			</div>			
-			<div class="hotel-copyright">Copyright @ 万达广场 版权所有</div>
+		<div id="no_shopping" class="shoping-no" style="display: none;">
+			<div class="content">
+				<ul class="">
+					<li>
+						<img src="../../images/restaurant/none_product_img@2x.png" alt="" />
+						<p>您的购物车是空空的，赶紧行动吧！您可以</p>
+					</li>
+				</ul>
+			</div>
+			<div class="fabu"><router-link :to="{name:'lifeHome'}" tag="span" class="btn">点击选购</router-link></div>
 		</div>
 	</div>
 </template>
@@ -74,18 +79,17 @@
         			name:"",
         			phone:"",
         			remark:"",
+        			address:"",
         			money:0,  //总价
         			point:0  //总积分
         		},
         		shopDown:{
         			comNum:0
         		},
-        		payType:["货到付款","店内消费","余额支付","微信支付"]
+        		payType:["到付","店内消费","余额支付","微信支付"]
         	}
         },    	
         mounted: function () {
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height() - $("#shoppingHome #pice-pay").height();//页面内容高度
-            $("#shoppingHome article").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
 			this.initShopping();
         },
         methods: {
@@ -143,18 +147,22 @@
 		    		globalMethod.layerUtils.iAlert("当前无下单商品");
 		    		return false;
 		    	}
-		    	if(this.shopOrder.room_id.length === 0){
-		    		globalMethod.layerUtils.iAlert("请输入房间号");
+		    	if(this.shopOrder.room_id.length === 0 && this.shopOrder.address.length === 0){
+		    		globalMethod.layerUtils.iAlert("请输入桌号或配送地址");
+		    		return false;
+		    	}
+		    	if(this.shopOrder.address.length !== 0 && this.shopOrder.phone.length === 0){
+		    		globalMethod.layerUtils.iAlert("如需配送请填写手机号");
 		    		return false;
 		    	}
 		    	return true;
 		    },
 		    changShow:function(even){
-		    	var height = $(even.target).siblings(".pice-mode-choice").is(":visible")&&"2rem"||"6rem";
-		    	$(even.target).siblings(".pice-mode-choice").slideToggle(300,function(){
-		    		$(even.target).toggleClass("is-show");
-		    	});
-		    	$(even.target).parent().animate({height:height},300);
+//		    	var height = $(even.target).siblings(".pice-mode-choice").is(":visible")&&"2rem"||"6rem";
+//		    	$(even.target).siblings(".pice-mode-choice").slideToggle(300,function(){
+//		    		$(even.target).toggleClass("is-show");
+//		    	});
+//		    	$(even.target).parent().animate({height:height},300);
 		    }
         }
     }

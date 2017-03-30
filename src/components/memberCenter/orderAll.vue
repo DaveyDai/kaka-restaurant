@@ -1,24 +1,44 @@
 <template>
-	<div id="orderAll" style="position: relative;">
+	<div id="orderAll" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
-			<article class="content">
-				<div class="clearfix">
-					<div class="orderbgstyle p_re" v-for="item in orderList" >
-						<!--<a href="javascript:void(0);"  >-->
-							<div class="orderidzt" v-on:click="orderDetail(item)">
-								<span><font class="color666">房间号：</font>{{item.room_id}}</span>
-								<span><font class="color666">消费额：</font>{{item.total}}元  </span>
-								<span><font class="color666">订单号：</font>{{item.id}}</span>
-								<span><font class="color666">下单时间：</font>{{item.create_time}}</span>
-								<span style="margin-bottom: 15px;color: #e74c3c;"><font class="color666">订单状态：</font>{{item.pay_type == 0 || item.pay_type == 1?"待处理":item.pay_status == 0?"未支付":"已支付"}}<div v-on:click.stop="payOrders(item)" class="payforOrder" v-if="item.pay_type != 0 && item.pay_type != 1 && item.pay_status == 0" >立即支付</div></span>
+			<div class="cy-content" id="has_orders" style="display: none;">
+				<ul>
+					<li v-for="item in orderList">
+						<div class="cy-order" v-on:click="orderDetail(item)">
+							<!--<span class="cy-li-img"></span>-->
+							<span class="cy-li-order">订单编号:<em v-text="item.id"></em></span>
+							<span class="cy-no-pay" v-text="item.pay_status==0&&'待处理'||item.pay_status==1&&'未支付'||item.pay_status==2&&'已支付'||item.pay_status==3&&'已完成'"></span>
+						</div>
+						<div class="content-allname" v-on:click="orderDetail(item)">
+							<div class="cy-new" v-for="orTr in item.order">
+								<div class="cy-new-content1">
+									<img v-bind:src="getImgUrl+orTr.image" alt="" />
+								</div>
+								<div class="cy-new-content2">
+									<span v-text="orTr.product_name"></span>
+								</div>
+								<div class="cy-new-content3">
+									<p v-text="'x'+orTr.num"></p>
+									<div class="cy-new-price">
+										<p class="p2"></p>
+										<p class="p3" v-text="'￥'+orTr.total+'元'"></p>
+									</div>
+								</div>
+							</div>	
+						</div>
+						<div class="cy-consume">
+							<div class="cy-consume-content2">
+								<div class="cy-consume-content2-number3">下单时间：<span v-text="item.create_time"></span></div>
+								<div class="cy-consume-content2-number4">
+									<span class="bottom-money" v-text="'￥'+item.total"></span>
+									<span @click="deleteOrder(item)" v-text="item.pay_status==0||item.pay_status==1?'取消订单':'删除订单'"></span>
+									<span class="input2" @click="payOrders(item)" v-if="item.pay_status==0||item.pay_status==1">立即支付</span>
+									<span class="input2" @click="choiceOrder(item)" v-if="item.pay_status==2||item.pay_status==3">再来一单</span>
+								</div>
 							</div>
-						<!--</a>-->
-						<div class="rerespan recordtopspa"><span class="re1">名称</span><span class="re2">单价</span><span class="re3">数量</span></div>
-						<div class="clear rerespan" v-for="orderItem in item.order" ><span class="re1">{{orderItem.product_name}}</span><span class="re2">{{orderItem.price}}</span><span class="re3">{{orderItem.num+orderItem.unit}}</span></div>
-						<div class="clear rerespan" v-if="item.order.length==0" ><span class="re1">{{item.product_name}}</span><span class="re2">{{item.price}}</span><span class="re3">{{item.num+item.unit}}</span></div>
-						<!--<div class="clear disnone order11more"><span><img width="20" src="/weixin/Public/img/order11.jpg"></span></div>-->
-					</div>
-				</div>
+						</div>
+					</li>
+				</ul>
 				<div class="hotel-page">
 					<div class="hotel-page-b" v-on:mousedown="getOrderList('back')" >
 						<img src="../../images/life_previous_pages_arrow@2x.png"/>
@@ -29,43 +49,22 @@
 						<span class="hotel-page-next">{{pageList.pageNo==pageList.pageAll&&"已到尾页"||"下一页"}}</span>
 						<img src="../../images/life_next_pages_arrow@2x.png"/>
 					</div>
-				</div>					
-			</article>	
+				</div>				
+			</div>	
+			<div id="no_order" class="order-no" style="display: none;">
+				<div class="content">
+					<ul class="">
+						<li>
+							<img src="../../images/restaurant/none_product_img@2x.png" alt="" />
+							<p>您还没有订单，赶紧行动吧！您可以</p>
+						</li>
+					</ul>
+				</div>
+				<div class="fabu"><router-link :to="{name:'lifeHome'}" tag="span" class="btn">点击选购</router-link></div>
+			</div>			
 		</section>
 	</div>
 </template>
-<style>
-	#orderAll .recordtopspa{
-		background-color: #FAFAFA;
-		color: #333;
-		border: 1px solid #e5e5e5;
-		overflow: hidden;
-		padding: 5px 3px;
-		box-shadow:0 0;
-	}
-	#orderAll .clear{
-		box-shadow:0 0;
-		overflow: hidden;
-		padding: 8px 5px;
-		border-bottom: 1px solid #e5e5e5;
-	}
-	#orderAll .orderbgstyle{
-		border-bottom:0;
-		margin-bottom: 20px;
-		background-color: #fff;
-		padding: 0;
-	}
-	#orderAll .payforOrder{
-	    display: inline-block;
-	    border: 1px solid #e74c3c;
-	    padding: 0 10px;
-	    color: #e74c3c;
-	    border-radius: 15px;
-	    position: absolute;
-	    right: 20px;		
-	}
-			
-</style>
 <script type="text/javascript">
     export default {
         data: function(){
@@ -74,13 +73,11 @@
         		pageList:{
         			pageNo:1,
         			pageAll:0
-        		}         		
+        		},
+        		getImgUrl:configuration.global.imgPath
         	}
         },    	
         mounted: function () {
-	      	console.log("加载首页...");
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height();//页面内容高度
-            $("#orderAll").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
             sessionStorage.removeItem("orderDetail");
             this.getOrderList();
         },
@@ -95,12 +92,21 @@
 		    	}
 		        this.$http.post(configuration.global.serverPath + "/api/order/getOrder",orderParam,{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
 		         	var results = response.data;
-		         	if(results.code === 200){
-		         		this.orderList = results.data.data;
+		         	if(results.code === 200 && results.data.data.length > 0){
+		         		var dataList = results.data.data;
+		         		for(var i=dataList.length;i--;){
+		         			if(dataList[i].order && dataList[i].order.length === 0){
+		         				dataList[i].order[0] = JSON.parse(JSON.stringify(dataList[i]))
+		         			}
+		         		}
+		         		this.orderList = dataList;
 		         		this.pageList.pageAll = Math.ceil(results.data.count/10)||1;
 		         		this.pageList.pageNo = pageNo;
+		         		document.getElementById("has_orders").style.display = "block"
+		         		document.getElementById("no_order").style.display = "none"
 		         	}else{
-		         		globalMethod.layerUtils.iAlert(results.message||"请求服务器失败");
+		         		document.getElementById("has_orders").style.display = "none"
+		         		document.getElementById("no_order").style.display = "block"		         		
 		         	}
 		        }, function (response) {
 		        	globalMethod.layerUtils.iAlert("连接服务器失败，请联系管理员");
@@ -114,7 +120,224 @@
 		    	sessionStorage.setItem("payOrder",JSON.stringify({order:item.id,money:item.total}));
 		    	sessionStorage.setItem("payItem",JSON.stringify(item));
 		    	this.$router.push({name:"orderPay"});
+		    },
+		    choiceOrder:function(item){
+		    	this.$router.push({name:"lifeHome"});
+		    },
+		    deleteOrder:function(item){
+		    	var deleParam = {
+		    		shopid:configuration.global.shopid,
+		    		token:sessionStorage.getItem("token"),		    	
+		    		orderId:item.id
+		    	}
+		        this.$http.post(configuration.global.serverPath + "/api/order/deleteOrder",deleParam,{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
+		         	var results = response.data;
+		         	if(results.code === 200){
+//		         		globalMethod.layerUtils.iAlert(results.message);
+		         		this.getOrderList();
+		         	}else{
+		         		globalMethod.layerUtils.iAlert(results.message||"请求服务器失败");
+		         	}
+		        }, function (response) {
+		        	globalMethod.layerUtils.iAlert("连接服务器失败，请联系管理员");
+		        });		    	
 		    }
         }
     }
 </script>
+<style>
+.cy-content > ul > li {
+	background-color: #fff;
+}
+.cy-content > ul > li .content-allname{
+    max-height: 17.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}	
+.cy-order{
+    position: relative;
+    width:100%;
+    height:3.2666666666666666rem;
+    background: #fff;
+    font-size:0.8666666666666667rem;
+    color:#666666;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.cy-order .cy-li-img{
+    margin: 0 0.6rem 0 0.8rem;
+    width: 1rem;
+    height: 1.0333333333333334rem;
+    background:url("../../images/restaurant/shop_selected_img@2x.png") no-repeat;
+    background-size:100%;
+}
+.cy-order .cy-li-order{
+    margin-left: 0.8rem;
+}
+.cy-order > span.active{
+    background:url("../../images/restaurant/shop_unselected_img@2x.png") no-repeat;
+    background-size: 100%;
+}
+.cy-order .cy-no-pay{
+    position: absolute;
+    right: 0.8rem;
+    display: inline-block;
+    height: 3.26rem;
+    line-height: 3.26rem;
+}
+/*列表2*/
+.cy-new{
+    position: relative;
+    width:100%;
+    display:-webkit-flex;
+    display:flex;
+    background-color:#f5f5f5;
+    height:4.733333333333333rem;
+    margin-bottom: 6px;
+}
+.cy-new .cy-new-content1{
+    padding-left:0.8rem;
+    height:4.733333333333333rem;
+}
+.cy-new .cy-new-content1 >img{
+
+    margin-top:0.5333333333333333rem;
+
+    width:3.7333333333333334rem;
+    height:3.7333333333333334rem;
+}
+
+.cy-new .cy-new-content2{
+    padding-left:0.6rem;
+    height:6.8rem;
+    height:4.733333333333333rem;
+    font-size:0.8666666666666667rem;
+    color:#303030;
+    padding-top:0.5333333333333333rem;
+    padding-right:0.8rem;
+}
+.cy-new .cy-new-content3{
+    position: absolute;
+    right: 0.8rem;
+    height:4.733333333333333rem;
+    text-align:right;
+    font-size:0.7333333333333333rem;
+    color:#303030;
+    padding-top:0.6666666666666666rem;
+
+}
+.cy-new .cy-new-content3 .cy-new-price{
+
+    font-size:0.8666666666666667rem;
+    margin-top:-0.3333333333333333rem;
+}
+.cy-new .cy-new-content3 .cy-new-price >.p2{
+    height: 1.3333333333333333rem
+}
+
+
+/*列表3*/
+.cy-consume{
+    width:100%;
+    display:-webkit-flex;
+    display:flex;
+
+    background:#fff;
+    margin-bottom: 1.4333333333333333rem;
+}
+
+.cy-consume .cy-consume-content1 .cy-consume-content1-number{
+    font-size:0.8666666666666667rem;
+    color:#9a9a9a;
+
+}
+
+.cy-consume .cy-consume-content2{
+    -webkit-flex:2.5;
+    flex:2.5;
+    text-align:right;
+    font-size:0.8666666666666667rem;
+    color:#9a9a9a;
+    padding-top:0.5rem;
+    padding-right:0.8rem;
+    padding-bottom:0.6333333333333333rem;
+
+}
+.cy-consume .cy-consume-content2 .cy-consume-content2-number3>span:nth-of-type(2) {
+    padding-left:1.5333333333333334rem;
+}
+.cy-consume .cy-consume-content2 .cy-consume-content2-number{
+    padding-top:0.5333333333333333rem;
+}
+.cy-consume-content2-number4 span{
+	display: inline-block;
+    border:1px solid #ff323a;
+    border-radius:28px;
+    height:1.8666666666666667rem;
+    color:#ff323a;
+    font-size:0.8rem;
+    margin-top:0.36666666666666664rem;
+    line-height: 1.8rem;
+    padding: 0 1rem;
+}
+.cy-consume-content2-number4 .input2{
+	margin-left: 0.5rem;
+    background:#ff323a;
+    color:#FFFFFF;
+}
+.cy-consume-content2-number4 .bottom-money {
+	font-size: 1.2rem;
+	color: #D5383E;
+	font-weight: 600;
+	border: 0;
+	padding-right: 6rem;
+}
+.order-no .content{
+    width:100%;
+    margin:0px auto;
+}
+.order-no .content>ul{
+
+}
+.order-no .content>ul>li{
+    text-align:center;
+    padding-top:2.966666666666667rem;
+}
+.order-no .content>ul>li>img{
+    width:7.9rem;
+    height:8.4rem;
+}
+.order-no .content>ul>li>p{
+    font-size:0.9333333333333333rem;
+    color:#000000;
+    padding-top:2.2666666666666666rem;
+}	
+.order-no .fabu{
+    width:100%;
+    height: 2.1rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+.order-no .fabu .btn{
+	display: inline-block;
+    height:2.1rem;
+    line-height: 2rem;
+    font-size:0.9333333333333333rem;
+    color:#ff5102;
+    border:1px solid #ff5102;
+    border-radius:4px;
+    padding: 0 1rem;
+}
+/*.null{
+    width:100%;
+    background:#f5f5f5;
+    height:0.5rem;
+}
+.null1{
+    width:100%;
+    background:white;
+    height:0.3333333333333333rem;
+}			*/
+</style>

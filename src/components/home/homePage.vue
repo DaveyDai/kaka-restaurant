@@ -21,7 +21,7 @@
 				</div>
 				<div class="c-hotel-centent">
 					<div class="c-h-in c-h-img">
-						<img v-bind:src="storeInfo.logo"/>
+						<img v-bind:src="getimgUrl+storeInfo.logo"/>
 					</div>
 					<div class="c-h-in c-h-cent">
 						<div class="c-h-name">
@@ -54,7 +54,7 @@
 				</div>
 				<div class="c-hot-hotel">
 					<div class="hot-h" v-for="hotItem in hotProductList" v-on:mousedown="shopDetails(hotItem)" >
-						<div class="hot-h-img"><img v-bind:src="hotItem.image"/></div>
+						<div class="hot-h-img"><img v-bind:src="getimgUrl+hotItem.image"/></div>
 						<div class="hot-h-name">{{hotItem.name}}</div>
 						<div class="hot-h-price">¥ {{hotItem.price}}/{{hotItem.unit}}</div>
 					</div>
@@ -144,6 +144,10 @@
 //          this.getHomeMenu();
             this.getHotProduct();
             this.getNotice();
+			setTimeout(function(){
+				document.getElementById('homePage').scrollTop=1
+			},0)
+			
         },
         methods: {
 			getStoreInfo:function(){
@@ -212,7 +216,6 @@
 		    	this.$router.push({name:modelId[item.id]});
 		    },
 		    shopDetails:function(shopItem){
-		    	sessionStorage.setItem("shopItem",JSON.stringify(shopItem));
 		    	this.$router.push({name:'shopdetails',query: {shopDetail:JSON.stringify(shopItem)}});
 		    },
 		    timeCheck:function(open_time,end_time){
@@ -223,7 +226,12 @@
 		    	var end_hours = end_time.slice(0,end_time.indexOf(":")),end_minutes = end_time.slice(end_time.indexOf(":")+1);
 		    	return open_hours == end_hours?Number(open_minutes)<=dateNew.getMinutes() && dateNew.getMinutes()<=Number(end_minutes):Number(open_hours)<=dateNew.getHours() && dateNew.getHours()<=Number(end_hours);
 		    }
-        }
+        },
+	  	computed: {
+		    getimgUrl:function(){
+		    	return configuration.global.imgPath
+		    }
+	  	}        
     }
     //轮播广告
     var queryScroller = function(v) {

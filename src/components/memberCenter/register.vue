@@ -1,9 +1,9 @@
 <template>
-	<div id="register" style="position: relative;">
+	<div id="register" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
 			<article class="content">
 				<div class="login-head">
-					<img src="../../images/login_in_head_img@2x.png"/>
+					<img src="../../images/restaurant/login_in_head_img@2x.png"/>
 				</div>				
 				<div class="pass-input pass-name">
 					<span>用户名<em>*</em></span><input type="text" name="userName" id="userName" v-model="regParam.username" placeholder="请输入您的用户名" maxlength="20" />
@@ -37,6 +37,71 @@
 		</section>
 	</div>	
 </template>
+<script type="text/javascript">
+    export default {
+        data: function(){
+        	return {
+        		regParam:{
+        			shopid:configuration.global.shopid,
+        			username:"",
+        			password:"",
+        			email:"",
+        			nickname:"",
+        			phone:"",
+        			address:"",
+        			qq:""
+        		},
+        		isShow:false
+        	}
+        },    	
+        mounted: function () {
+        },
+        methods: {
+        	isEnNumeric:function(strValue){
+        		// 判断是否为英文、数字、字母或_
+				var pattern = /^[_0-9a-zA-Z]+$/;  
+				return pattern.test(strValue);        		
+        	},
+        	checkPwd:function(){
+        		document.getElementById("checkPwdS").style.display = this.regParam.password === document.getElementById("pwdr").value?"none":"block";
+        		return this.regParam.password === document.getElementById("pwdr").value;
+        	},
+        	goRegister:function(){
+        		if(this.checkReg()){
+			        this.$http.post(configuration.global.serverPath + "/api/login/register",this.regParam,{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
+			         	var results = response.data;
+		                if(results.code === 200){
+		                	sessionStorage.setItem("token",results.data.token);
+		                	globalMethod.layerUtils.iAlert("注册成功",function(){
+		                		this.$router.push({name:sessionStorage.getItem("toLoginPageCode")});
+		                	}.bind(this));
+		                }else if(results.code === -1){
+		                    globalMethod.layerUtils.iAlert(results.data);
+		                }else{
+		                	globalMethod.layerUtils.iAlert(results.data);
+		                }
+			        },function (response) {
+			        	alert(JSON.stringify(response.data));
+			        });         			
+        		}
+        	},
+        	checkReg:function(){
+        		if(!this.regParam.username || !this.isEnNumeric(this.regParam.username)){
+        			globalMethod.layerUtils.iAlert("用户名输入不正确!");
+        			return false;
+        		}
+        		if(!this.regParam.password || !this.regParam.password.replace(/\s/g,"")){
+        			globalMethod.layerUtils.iAlert("请设置密码!");
+        			return false;
+        		}
+        		if(!this.checkPwd()){
+        			return false;
+        		}
+        		return true;        		
+        	}
+        }
+    }
+</script>
 <style>
 	#register{
 		background-color: #fff;
@@ -94,7 +159,7 @@
 		width: 80%;
 		height: 2.6666666666666665rem;
 		line-height: 2.6666666666666665rem;
-		background-color: #01b8ff;
+		background-color: #ff5959;
 		text-align: center;
 		font-size: 1rem;
 		color: #fff;
@@ -105,7 +170,7 @@
 		position: relative;
 		width: 100%;
 		height: 8.233333333333333rem;
-		background: linear-gradient(to right top,#14b6f5,#6ed6ff);
+		background: linear-gradient(to right top,#ff5959,#ff9146);
 	}
 	.login-head img{
 		width: 5.466666666666667rem;
@@ -120,70 +185,3 @@
 		margin-top: 1rem;
 	}	
 </style>
-<script type="text/javascript">
-    export default {
-        data: function(){
-        	return {
-        		regParam:{
-        			shopid:configuration.global.shopid,
-        			username:"",
-        			password:"",
-        			email:"",
-        			nickname:"",
-        			phone:"",
-        			address:"",
-        			qq:""
-        		},
-        		isShow:false
-        	}
-        },    	
-        mounted: function () {
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height();//页面内容高度
-            $("#register").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
-        },
-        methods: {
-        	isEnNumeric:function(strValue){
-        		// 判断是否为英文、数字、字母或_
-				var pattern = /^[_0-9a-zA-Z]+$/;  
-				return pattern.test(strValue);        		
-        	},
-        	checkPwd:function(){
-        		document.getElementById("checkPwdS").style.display = this.regParam.password === document.getElementById("pwdr").value?"none":"block";
-        		return this.regParam.password === document.getElementById("pwdr").value;
-        	},
-        	goRegister:function(){
-        		if(this.checkReg()){
-			        this.$http.post(configuration.global.serverPath + "/api/login/register",this.regParam,{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
-			         	var results = response.data;
-		                if(results.code === 200){
-		                	sessionStorage.setItem("token",results.data.token);
-		                	globalMethod.layerUtils.iAlert("注册成功",function(){
-		                		this.$router.push({name:sessionStorage.getItem("toLoginPageCode")});
-		                	}.bind(this));
-		                }else if(results.code === -1){
-		                    globalMethod.layerUtils.iAlert(results.data);
-		                }else{
-		                	globalMethod.layerUtils.iAlert(results.data);
-		                }
-			        },function (response) {
-			        	alert(JSON.stringify(response.data));
-			        });         			
-        		}
-        	},
-        	checkReg:function(){
-        		if(!this.regParam.username || !this.isEnNumeric(this.regParam.username)){
-        			globalMethod.layerUtils.iAlert("用户名输入不正确!");
-        			return false;
-        		}
-        		if(!this.regParam.password || !this.regParam.password.replace(/\s/g,"")){
-        			globalMethod.layerUtils.iAlert("请设置密码!");
-        			return false;
-        		}
-        		if(!this.checkPwd()){
-        			return false;
-        		}
-        		return true;        		
-        	}
-        }
-    }
-</script>

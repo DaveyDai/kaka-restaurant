@@ -39,18 +39,18 @@
 		width: 2.4rem;
 		height: 2.4rem;
 	}
-	.mess-xinxin{
+	.message-xin .mess-xinxin{
 		margin-left: 0.33rem;
 	}
-	.mess-xinxin .order-xinxin{
+	.message-xin .mess-xinxin .order-xinxin{
 		display: inline-block;
 		margin: -0.26rem 0.26rem;
 		width: 1.2rem;
 		height: 1.2rem;
-		background: url(../../images/member_full_star_img@2x.png) no-repeat;
+		background: url(../../images/member_star_image@2x.png) no-repeat;
 		background-size: 1.2rem;
 	}
-	.mess-xinxin em.active{
+	.message-xin .mess-xinxin em.active{
 		background: url(../../images/member_empty_star_img@2x.png) no-repeat;
 		background-size: 1.2rem;
 	}

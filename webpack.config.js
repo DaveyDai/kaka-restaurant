@@ -5,7 +5,7 @@ var vue = require("vue-loader");
 //定义了文件夹的路径
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'src/main.js');
-var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+var BUILD_PATH = path.resolve(ROOT_PATH, 'restaurantBuild');
 
 module.exports = {
 	//项目的文件夹 可以直接用文件夹名称 默认会找index.js 也可以确定是哪个文件名字
@@ -17,7 +17,7 @@ module.exports = {
 		path: BUILD_PATH,
 		filename: '[name].js',
 		// 指向异步加载的路径
-		publicPath: './build/',
+		publicPath: './restaurantBuild/',
 		// 非主文件的命名规则
 		chunkFilename: '[id].build.js?[chunkhash]'
 	},

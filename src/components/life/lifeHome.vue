@@ -1,5 +1,5 @@
 <template>
-	<div id="lifeHome" style="position: relative;">
+	<div id="lifeHome" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 		<header class="header">
 			<div class="life-navigationBar">
 				<div class="navB-content" v-for="(item,index) in categoryList" v-bind:class="{active:index===0}" v-on:mousedown="categoryChoice(item,$event)" >{{item.name}}</div>
@@ -18,7 +18,7 @@
 				<div class="hotel-list">
 					<ul id="productAll">
 						<li v-for="item in productList" v-bind:id="item.id" >
-							<div class="hotel-lists hotel-list-img" v-on:mousedown="shopDetails(item)"><img v-bind:src="item.image" /></div>
+							<div class="hotel-lists hotel-list-img" v-on:mousedown="shopDetails(item)"><img v-bind:src="getImgUrl+item.image" /></div>
 							<div class="hotel-lists hotel-list-content">
 								<div class="hotel-content-name">{{item.name}}<div class="hotel-change-hot" v-if="item.is_hot==1" >火爆</div></div>
 								<div class="hotel-content-pay" v-on:mousedown="shopDetails(item)">¥ {{item.price}}元  / {{item.unit}}</div>
@@ -34,7 +34,7 @@
 							</div>
 						</li>
 					</ul>
-					<div class="hotel-page">
+					<div class="hotel-page" v-if="productList.length > 0">
 						<div class="hotel-page-b" v-on:mousedown="getProduct('back')" >
 							<img src="../../images/life_previous_pages_arrow@2x.png"/>
 							<span class="hotel-page-back">{{pageList.pageNo==1&&"已到首页"||"上一页"}}</span>							
@@ -44,9 +44,18 @@
 							<span class="hotel-page-next">{{pageList.pageNo==pageList.pageAll&&"已到尾页"||"下一页"}}</span>
 							<img src="../../images/life_next_pages_arrow@2x.png"/>
 						</div>
-					
 					</div>
 				</div>
+				<div class="myCoupon-conter-no" v-if="productList.length == 0">
+					<div class="content">
+						<ul class="">
+							<li>
+								<img src="../../images/restaurant/none_coupons_img@2x.png" alt="" />
+								<p>当前无商品信息</p>
+							</li>
+						</ul>
+					</div>
+				</div>				
 			</article>
 		</section>
 	</div>
@@ -65,14 +74,11 @@
         		},
         		screenValue:"",
         		isScreen:false,
-        		product_category:""
+        		product_category:"",
+        		getImgUrl:configuration.global.imgPath
         	}
         },    	
         mounted: function () {
-	      	console.log("加载首页...");
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").innerHeight() - $("#lifeHome .header").innerHeight();//页面内容高度
-            $("#lifeHome section").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
-//      	globalMethod.layerUtils.iLoading(true);
         	this.getStoreInfo();
         	this.getProduct();
         },
@@ -152,7 +158,6 @@
         		document.getElementById("screenInput").focus();
         	},
 		    shopDetails:function(shopItem){
-		    	sessionStorage.setItem("shopItem",JSON.stringify(shopItem));
 		    	this.$router.push({name:'shopdetails',query: {shopDetail:JSON.stringify(shopItem)}});
 		    },
 		    initChangeNum:function(elem){

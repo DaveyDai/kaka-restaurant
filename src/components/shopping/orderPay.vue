@@ -1,12 +1,12 @@
 <template>
-	<div id="orderPay" style="position: relative;">
+	<div id="orderPay" style="position: relative;height:calc(100vh);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
 			<article class="content">
 				<div class="c-order-commd">
 					<ul>
 						<li v-for="item in orderPayList">
-							<div class="order-c-img"><img src="../../images/shop_header_default_image@2x.png"/></div>
-							<div class="order-c-cont"><div class="order-cont-pace">¥ {{item.price}}</div><div class="order-cont-name">{{item.product_name||item.name}}</div></div>
+							<div class="order-c-img"><img v-bind:src="item.image"/></div>
+							<div class="order-c-cont"><div class="order-cont-pace">¥ {{item.total}}</div><div class="order-cont-name">{{item.product_name||item.name}}</div></div>
 							<div class="order-num">数量:  {{item.num+item.unit}}</div>
 							<!--<div class="commodity-choice comm-li-info">
 								<div class="commodity-change-j">一</div>
@@ -46,8 +46,6 @@
         	}
         },    	
         mounted: function () {
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height();//页面内容高度
-            $("#orderPay").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
             this.orderPayList = sessionStorage.getItem("prePageCode") == "shoppingHome"?JSON.parse(sessionStorage.getItem("shopCart")):this.payInit();
         },
         methods: {

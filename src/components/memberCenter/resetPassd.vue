@@ -1,9 +1,9 @@
 <template>
-	<div id="resetPassd" style="position: relative;">
+	<div id="resetPassd" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
 			<article class="content">
 				<div class="login-head">
-					<img src="../../images/login_in_head_img@2x.png"/>
+					<img src="../../images/restaurant/login_in_head_img@2x.png"/>
 				</div>				
 				<div class="pass-input pass-name">
 					<span>用户名</span><input type="text" v-model="resetParam.username" placeholder="请输入您的用户名"/>
@@ -57,7 +57,7 @@
 		position: relative;
 		width: 100%;
 		height: 8.233333333333333rem;
-		background: linear-gradient(to right top,#14b6f5,#6ed6ff);
+		background: linear-gradient(to right top,#ff5959,#ff9146);
 	}
 	.login-head img{
 		width: 5.466666666666667rem;
@@ -80,7 +80,7 @@
 	    border-radius: 40px;	
 	}
 	.pass-go span.pass-goto{
-		background-color: #14B6F5;
+		background-color: #ff5959;
 		color: #fff;
 	}
 </style>
@@ -97,8 +97,6 @@
         	}
         },    	
         mounted: function () {
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height();//页面内容高度
-            $("#resetPassd").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");        	
         	this.resetParam.username = this.$route.query.username||"";
         },
         methods: {

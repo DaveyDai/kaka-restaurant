@@ -1,5 +1,5 @@
 <template>
-	<div id="personInfo" style="position: relative;">
+	<div id="personInfo" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 		<section class="main fixed">
 			<article class="content">
 				<div class="bgstyle clear customer">
@@ -16,7 +16,7 @@
 						<dd><input name="foicq" v-model="personInfo.qq" type="tel" class="borderstyle radius5" maxlength="30" placeholder="在这里填写您的QQ号"></dd>
 					</dl>
 					<dl><dt>登陆密码</dt>
-						<dd><input class="borderstyle radius5" v-model="personInfo.password" type="password" name="passwordone" placeholder="需要修改密码请输入，不修改请留空。"></dd>
+						<dd><input class="borderstyle radius5" v-model="personInfo.password" type="password" name="passwordone" placeholder="需要修改密码时输入"></dd>
 					</dl>
 					<dl><dt>重复密码</dt>
 						<dd><input id="checkPwd" class="borderstyle radius5" type="password" name="passwordsecond" value="" placeholder="再次输入一次刚才的密码"></dd>
@@ -39,78 +39,11 @@
 						</dd>
 					</dl>-->
 				</div>
-				<div class="account"><div class="account-btn" v-on:mousedown="submitInfo()" >确认保存</div></div>
-				<!--<div class="hotel-copyright">Copyright @ 万达广场 版权所有</div>-->
+				<div class="account"><div class="account-btn" v-on:mousedown="submitInfo()" >保存</div></div>
 			</article>	
-			
 		</section>
 	</div>
 </template>
-<style>
-	#personInfo{
-		font-size: 14px;
-	}
-	#personInfo .customer{
-		margin-top: 0;
-		background: 0;
-		box-shadow: none;
-		font-size: 0.9rem;
-	}
-	#personInfo .customer input{
-		font-size: 0.9rem;
-	}
-	#personInfo .customer dl{
-		background-color: #fff;
-	}
-	#personInfo .customer dl.r-address{
-		margin-top: 0.67rem;
-	}
-	#personInfo .member-name dd{
-		padding: 10px 0 0 15px;
-	}
-	#UdateChoose select {
-		font-size: 14px;
-		-webkit-appearance: none;
-		outline: none;
-	}
-	
-	.car_labse {
-		margin-bottom: 5px;
-		box-shadow: none;
-		background-image: none;
-		border-color: #eee;
-	}
-	
-	.UdateMonthC,
-	.UdatedayC {
-		width: 45%!important;
-		float: left;
-	}
-	
-	.UdateMonthC {
-		margin-right: 5px;
-	}
-	
-	.UserDateCheck {
-		margin-top: 5px;
-	}
-	
-	#__ErrorMessagePanel {
-		display: block;
-	}
-	
-	.borderstyle {
-		border: 1px solid #fff;
-		box-shadow: none;
-		-webkit-appearance: none;
-		outline: none;
-	}
-	#checkPwds,#checkDeta{
-		color: red;
-		padding-left: 10%;
-		display: none;
-	}
-</style>
 <script type="text/javascript">
     export default {
         data: function(){
@@ -119,9 +52,6 @@
         	}
         },    	
         mounted: function () {
-	      	console.log("加载首页...");
-        	var scrollerConHeight = $(window).height() - $("#afui #footer").height();//页面内容高度
-            $("#personInfo").css("overflow-y", "auto").css("overflow-x","hidden").css("height", scrollerConHeight + "px");
             this.getPersonInfo();
         },
         methods: {
@@ -184,3 +114,105 @@
         }
     }
 </script>
+<style>
+	#personInfo{
+		font-size: 14px;
+	}
+	#personInfo .customer{
+		margin-top: 0;
+		background: 0;
+		box-shadow: none;
+		font-size: 0.9rem;
+	}
+	#personInfo .customer input{
+		font-size: 0.9rem;
+	}
+	#personInfo .customer dl{
+		background-color: #fff;
+	}
+	#personInfo .customer dl.r-address{
+		margin-top: 0.67rem;
+	}
+	#personInfo .member-name dd{
+		padding: 10px 0 0 15px;
+	}
+	#UdateChoose select {
+		font-size: 14px;
+		-webkit-appearance: none;
+		outline: none;
+	}
+	
+	#personInfo .car_labse {
+		margin-bottom: 5px;
+		box-shadow: none;
+		background-image: none;
+		border-color: #eee;
+	}
+	
+	#personInfo .UdateMonthC,
+	#personInfo .UdatedayC {
+		width: 45%!important;
+		float: left;
+	}
+	
+	#personInfo .UdateMonthC {
+		margin-right: 5px;
+	}
+	
+	#personInfo .UserDateCheck {
+		margin-top: 5px;
+	}
+	
+	#__ErrorMessagePanel {
+		display: block;
+	}
+	
+	#personInfo .borderstyle {
+		border: 1px solid #fff;
+		box-shadow: none;
+		-webkit-appearance: none;
+		outline: none;
+	}
+	#checkPwds,#checkDeta{
+		color: red;
+		padding-left: 10%;
+		display: none;
+	}
+	#personInfo input,#personInfo textarea,#personInfo select{
+		font-size:14px!important;
+	}
+	#personInfo .customer dt {
+		margin-right: -100%;
+		float: left;
+		width: 80px;
+		color: #000;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		text-align: right;
+		height: 43px;
+		line-height: 43px;
+		margin: 1px -100% 0px 0;
+		overflow: hidden;
+		padding-right: 5px;
+	}
+	#personInfo .customer dd .inputRes{
+		height: 33px;
+		width: 90%;
+		border: 0
+	}
+	#personInfo .customer .borderstyle {
+		width: 95%;
+		color: #666;
+		height: 33px
+	}
+	#personInfo .customer textarea {
+		width: 90%;
+		height: 100px;
+		border: 0;
+	}
+	#personInfo .customer dd {
+		position: relative;
+		margin-left: 90px;
+		padding: 5px 0 5px 5px;
+	}	
+</style>

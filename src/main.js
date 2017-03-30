@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 //注册模块插件
 Vue.use(VueResource);
-
+require("./css/style.css")
 //全局对象
 window.globalMethod = {};
 globalMethod.iscrollUtils = require("./js/plugins/iscroll/scripts/iscrollUtils.js");
@@ -11,28 +11,17 @@ globalMethod.setHscroll = function(elem,scrollerConHeight){}
 window.configuration = {
 	"global": {
 		"serverPath": "http://wx.szgulu.com/vipyun/public",//http://112.74.18.249:88/vipyun/public/index.php",
-		"imgPath":"http://112.74.18.249:88/vipyun/public/static/upload/",
-		"shopid":sessionStorage.getItem("shopid")
+		"imgPath":"http://112.74.18.249:88/vipyun/public/uploads/",
+		"shopid":localStorage.getItem("shopid")
 	}
 };
-if(!configuration.global.shopid)globalMethod.layerUtils.iAlert("获取商店ID失败");
 //启动路由
 import router from './router/router'
 new Vue({router:router}).$mount('#app');
-
-//微信自动登陆
-var code = sessionStorage.getItem("code");
-if(code&&!sessionStorage.getItem("token")){
-	Vue.http.post(configuration.global.serverPath + "/api/wxpay/wxLogin", {shopid:configuration.global.shopid,code:code}, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, emulateJSON: true }).then(function(response) {
-		var results = response.data;
-		if(results.code === 200) {
-			sessionStorage.setItem("token",results.data.token);
-			sessionStorage.setItem("openid",results.data.openid);
-		} 
-	}, function(response) {});	
-}
-var footerElem = document.getElementById("footer").getElementsByTagName("li");
-for(var i = 0,len=footerElem.length;i<len;i++){
+//底部菜单栏
+var footerElem = document.getElementById("footer").getElementsByTagName("li"), footerName = ["首页","菜单","购物车","会员中心"];
+for(var i = footerElem.length;i--;){
+	footerElem[i].getElementsByTagName("span")[0].innerText = footerName[i];
 	footerElem[i].addEventListener("touchstart",function(){
 		this.style.backgroundColor = "#999"
 	})
@@ -41,6 +30,17 @@ for(var i = 0,len=footerElem.length;i<len;i++){
 	})
 }
 
+//微信自动登陆
+var code = sessionStorage.getItem("code"),ua = navigator.userAgent.toLowerCase();
+if(ua.indexOf('micromessenger') != -1&&code&&!sessionStorage.getItem("token")){
+	Vue.http.post(configuration.global.serverPath + "/api/wxpay/wxLogin", {shopid:configuration.global.shopid,code:code}, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, emulateJSON: true }).then(function(response) {
+		var results = response.data;
+		if(results.code === 200) {
+			sessionStorage.setItem("token",results.data.token);
+			sessionStorage.setItem("openid",results.data.openid);
+		} 
+	}, function(response) {});	
+}
 //购物车状态全局管理
 globalMethod.changeLocalStorage = function(key,item,callback,elem){
 	var commodity = {id:Number(item.id),name:item.name,unit:item.unit,price:item.price,point:item.point,num:1};//构建商品
@@ -65,7 +65,6 @@ globalMethod.changeLocalStorage = function(key,item,callback,elem){
 	var choiceElem = document.getElementById("choiceCommodityNum");
 	choiceElem.innerText = commodNum;
 	choiceElem.style.display = commodNum > 0?"block":"none";
-	if(typeof callback === "function")callback();
 	//+-动画
 	if(typeof elem === "object"){
 		var animfn = function(){
@@ -77,6 +76,7 @@ globalMethod.changeLocalStorage = function(key,item,callback,elem){
 		elem.addEventListener("animationend",animfn)
 		elem.addEventListener("webkitAnimationend",animfn)
 	}
+	if(typeof callback === "function")callback();
 }
 //购物车显示重拾
 var comCart = JSON.parse(localStorage.getItem("shopCart"))||[],commNum = 0;

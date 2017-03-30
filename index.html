@@ -17,31 +17,40 @@
 		<meta name="msapplication-tap-highlight" content="no" />
 		<meta name="x5-fullscreen" content="true">
 		<meta name="full-screen" content="yes">		
-		<link rel="stylesheet" href="src/css/style.css">
+		<!--<link rel="stylesheet" href="src/css/style.css">-->
 	</head>
-	<style type="text/css">
-	</style>
 	<body>
-		<div id="afui">
-			<div id="app">
-				<router-view></router-view>
-			    <div class="footer" id="footer">
-			    	<div class="ft_nav">
-			        	<ul class="clearfix">
-			                <router-link :to="{name : 'homePage'}" tag="li" id="home"><span>首页</span></router-link>
-			                <router-link :to="{name : 'lifeHome'}" tag="li" id="life"><span>菜单</span></router-link>
-			                <router-link :to="{name : 'shoppingHome'}" tag="li" id="shopping"><span>购物车</span><div class="choice-commodityNum" id="choiceCommodityNum" style="display: none;">0</div></router-link>
-			                <router-link :to="{name : 'memberHome'}" tag="li" id="memberCenter" ><span>会员中心</span></router-link>		                
-			        	</ul>
-			        </div>
-			    </div>				
-			</div>
-		</div>
 		<script type="text/javascript">
+			var shopid = window.location.href.indexOf("shopid=")!=-1&&location.search.slice(1).split("=")[1].split("#")[0]||"shop830412";
+			if(!shopid){
+				alert("未获取到店铺id");
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.abort();
+				window.stop();
+			}else{
+				localStorage.setItem("shopid",shopid);//先获取830412店铺IDshop888
+			}
+			var code = window.location.href.indexOf("code=")!=-1&&location.search.slice(1).split("&")[0].split("=")[1]||"";
+			if(navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1&&!code && window.location.href.indexOf('wx.szgulu.com')!=-1){
+				window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx818d92d869000e7c&redirect_uri=http%3A%2F%2Fwx.szgulu.com%2Frestaurant&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+			}else{
+				sessionStorage.setItem("code", code);
+			}
 			document.getElementsByTagName("html")[0].style.cssText = "font-size: " + 30/750*document.body.offsetWidth + "px;";
-			sessionStorage.setItem("code", location.search.slice(1).split("&")[0].split("=")[1] || "");
-			sessionStorage.setItem("shopid",window.location.href.indexOf("shopid=")!=-1&&window.location.href.split("?")[1].split("=")[1].split("#!")[0]||"shop830412");//先获取店铺IDshop888		
-		</script>
-	    <script src="build/build.js"></script>
+		</script>		
+		<div id="app">
+			<router-view></router-view>
+		    <div class="footer" id="footer">
+		    	<div class="ft_nav">
+		        	<ul class="clearfix">
+		                <router-link :to="{name : 'homePage'}" tag="li" id="home"><span></span></router-link>
+		                <router-link :to="{name : 'lifeHome'}" tag="li" id="life"><span></span></router-link>
+		                <router-link :to="{name : 'shoppingHome'}" tag="li" id="shopping"><span></span><div class="choice-commodityNum" id="choiceCommodityNum" style="display: none;">0</div></router-link>
+		                <router-link :to="{name : 'memberHome'}" tag="li" id="memberCenter" ><span></span></router-link>		               
+		        	</ul>
+		        </div>
+		    </div>				
+		</div>
+	    <script src="restaurantBuild/build.js"></script>
 	</body>
 </html>

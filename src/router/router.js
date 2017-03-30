@@ -25,7 +25,7 @@ export default(function() {
 	}, {
 		path: '/life/shopdetails',
 		name: 'shopdetails',
-		meta: { title: "商品详情", isLogin: false },
+		meta: { title: "商品详情", isLogin: false, showBottom: true},
 		component: function(resolve) { require(['../components/life/shopdetails.vue'], resolve) }
 	}, {
 		path: '/shopping/shoppingHome',
@@ -95,7 +95,7 @@ export default(function() {
 	}, {
 		path: '/memberCenter/orderDetail',
 		name: 'orderDetail',
-		meta: { title: "订单详情", isLogin: true },
+		meta: { title: "订单详情", isLogin: true , showBottom: true },
 		component: function(resolve) { require(['../components/memberCenter/orderDetail.vue'], resolve) }
 	}, {
 		path: '/memberCenter/personInfo',
@@ -132,7 +132,6 @@ export default(function() {
 	}];
 	const router = new VueRouter({ routes: routes });
 	router.afterEach(function(to, from, next) {
-		console.log('成功导航到: ' + to.name);
 		var footerElem = document.getElementById("footer").getElementsByTagName("span");
 		for(var i=footerElem.length;i--;)footerElem[i].className = ""
 		document.getElementById(to.path.split("/")[1]).getElementsByTagName("span")[0].className = "active";
@@ -141,7 +140,6 @@ export default(function() {
 		document.getElementById("footer").style.display = !!to.meta.showBottom ? "none" : "block";
 	});
 	router.beforeEach(function(to, from, next) {
-		console.log("开始路由---全局钩子开始：" + to.name);
 		if(to.meta.isLogin && !sessionStorage.getItem("token")) {
 			sessionStorage.setItem("toLoginPageCode", to.name);
 			next({ name: "login" })

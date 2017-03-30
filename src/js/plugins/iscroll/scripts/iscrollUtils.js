@@ -1,6 +1,3 @@
-/**
- * 自定义的 Iscroll 工具文件2016年12月15日 戴锦辉
- */
 var IScroll = require("./iscroll");
 /**
  * 初始化垂直滚动组件

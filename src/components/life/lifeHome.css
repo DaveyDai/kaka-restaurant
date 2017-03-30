@@ -167,10 +167,29 @@
 	color: #fff;
 	background-color: #D5383E;
 	border-radius: 25px;
-	padding: 0.1rem 0.7rem 0.1rem 0.5rem;
+	padding: 0 0.7rem 0.1rem 0.5rem;
 	text-align: center;
 	margin-left: 1rem;
 } 
+.myCoupon-conter-no .content{
+    width:100%;
+    margin:0px auto;
+}
+.content>ul{
 
+}
+.myCoupon-conter-no .content>ul>li{
+    text-align:center;
+    padding-top:2.966666666666667rem;
+}
+.myCoupon-conter-no .content>ul>li>img{
+    width:7.9rem;
+    height:8.4rem;
+}
+.myCoupon-conter-no .content>ul>li>p{
+    font-size:0.9333333333333333rem;
+    color:#000000;
+    padding-top:2.2666666666666666rem;
+}
 
 
