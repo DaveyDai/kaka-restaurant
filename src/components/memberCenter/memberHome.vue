@@ -113,6 +113,7 @@
 		},
 		mounted: function() {
 			this.getPersonInfo();
+			globalMethod.setHscroll("memberHome");
 		},
 		methods: {
 			signHide: function() {

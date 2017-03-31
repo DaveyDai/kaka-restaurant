@@ -58,6 +58,11 @@ export default(function() {
 		meta: { title: "登陆", isLogin: false },
 		component: function(resolve) { require(['../components/memberCenter/login.vue'], resolve) }
 	}, {
+		path: '/memberCenter/messLogin',
+		name: 'messLogin',
+		meta: { title: "短信登陆", isLogin: false },
+		component: function(resolve) { require(['../components/memberCenter/messLogin.vue'], resolve) }
+	}, {
 		path: '/memberCenter/memberPoints',
 		name: 'memberPoints',
 		meta: { title: "会员积分卡", isLogin: true },

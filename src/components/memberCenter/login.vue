@@ -20,7 +20,8 @@
 				</div>
 				<div class="login-other">
 					<router-link :to="{name:'register'}" href="javascript:void(0)" class="login-o-get">快速注册</router-link>
-					<router-link :to="{name:'callPasswd'}" href="javascript:void(0)" class="login-o-forget">忘记密码？</router-link>
+					<router-link :to="{name:'messLogin'}" href="javascript:void(0)" class="login-o-forget">短信登录</router-link>
+					<!--<router-link :to="{name:'callPasswd'}" href="javascript:void(0)" class="login-o-forget">忘记密码？</router-link>-->
 				</div>
 			</article>
 		</section>

@@ -1,6 +1,6 @@
 <template>
 	<div id="orderDetail" style="position: relative;">
-		<section class="main fixed" style="height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;background-color: #fff;">
+		<section class="main fixed" id="orderHeights" style="height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;background-color: #fff;">
 			<article class="content">
 				<div class="detail-content">
 					<div class="detail-order">
@@ -14,18 +14,20 @@
 							<div v-text="orderDetail.pay_status==0&&'待处理'||orderDetail.pay_status==1&&'未支付'||orderDetail.pay_status==2&&'已支付'||orderDetail.pay_status==3&&'已完成'"></div>
 						</div>
 					</div>
-					<div class="detail-new" v-for="item in orderDetail.order">
-						<div class="detail-new-content1">
-							<img v-bind:src="getImgUrl+item.image" alt="" />
-						</div>
-						<div class="detail-new-content2">
-							<span>{{item.product_name}}</span>
-						</div>
-						<div class="detail-new-content3">
-							<p> x{{item.num}}</p>
-							<div class="detail-new-price">
-								<p class="p2"></p>
-								<p class="p3">￥{{item.total}}元</p>
+					<div class="content-allname">
+						<div class="detail-new" v-for="item in orderDetail.order">
+							<div class="detail-new-content1">
+								<img v-bind:src="getImgUrl+item.image" alt="" />
+							</div>
+							<div class="detail-new-content2">
+								<span>{{item.product_name}}</span>
+							</div>
+							<div class="detail-new-content3">
+								<p> x{{item.num}}</p>
+								<div class="detail-new-price">
+									<p class="p2"></p>
+									<p class="p3">￥{{item.total}}元</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -70,6 +72,7 @@
 			var orderdeta = JSON.parse(sessionStorage.getItem("orderDetail"));
 			if(orderdeta&&orderdeta.order.length ===0)orderdeta.order = JSON.parse(JSON.stringify(orderdeta));
 			this.orderDetail = orderdeta;
+			globalMethod.setHscroll("orderHeights");
 		},
 		methods: {
 			goMess: function() {
@@ -318,5 +321,10 @@
 		border: 1px solid #F7353C;
 		width: 5.8rem;
 		line-height: 1.8rem;
+	}
+	.detail-content .content-allname {
+		max-height: 17.5rem;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 </style>

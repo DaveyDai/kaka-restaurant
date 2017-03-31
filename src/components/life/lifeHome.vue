@@ -50,8 +50,8 @@
 					<div class="content">
 						<ul class="">
 							<li>
-								<img src="../../images/restaurant/none_coupons_img@2x.png" alt="" />
-								<p>当前无商品信息</p>
+								<!--<img src="../../images/restaurant/none_coupons_img@2x.png" alt="" />
+								<p>当前无商品信息</p>-->
 							</li>
 						</ul>
 					</div>
@@ -81,6 +81,7 @@
         mounted: function () {
         	this.getStoreInfo();
         	this.getProduct();
+        	globalMethod.setHscroll("lifeHome");
         },
         methods: {
 			getStoreInfo:function(){

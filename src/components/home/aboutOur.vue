@@ -3,7 +3,7 @@
 		<section class="main fixed">
 			<article class="content">
 				<div class="bgstyle clearfix merchant">
-					<div class="about-shop-img"><img v-bind:src="storeInfo.logo"></div>
+					<div class="about-shop-img"><img v-bind:src="getimgUrl+storeInfo.logo"></div>
 					<div class="about-shop-name" v-text="storeInfo.name"></div>
 				</div>
 				<div class="shopings">
@@ -70,7 +70,8 @@
     export default {
         data: function(){
         	return {
-        		storeInfo:{}
+        		storeInfo:{},
+        		getimgUrl:configuration.global.imgPath
         	}
         },    	
         mounted: function () {

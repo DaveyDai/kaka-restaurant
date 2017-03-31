@@ -1,7 +1,7 @@
 <template>
 	<div id="shoppingHome" style="position: relative;">
 		<section class="main fixed" id="has_shopping">
-			<article class="content" style="position: relative;height:calc(100vh - 6.26rem);overflow-x: hidden;overflow-y: auto;">
+			<article class="content" id="shopHomePage" style="position: relative;height:calc(100vh - 6.26rem);overflow-x: hidden;overflow-y: auto;">
 				<div class="shoping-commoditys">
 					<li v-for="item in shopOrder.order" >
 						<div class="commodity-information comm-li-info">
@@ -91,6 +91,7 @@
         },    	
         mounted: function () {
 			this.initShopping();
+			globalMethod.setHscroll("shopHomePage");
         },
         methods: {
             backPage:function() {

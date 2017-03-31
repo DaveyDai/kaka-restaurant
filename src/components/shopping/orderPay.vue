@@ -5,8 +5,11 @@
 				<div class="c-order-commd">
 					<ul>
 						<li v-for="item in orderPayList">
-							<div class="order-c-img"><img v-bind:src="item.image"/></div>
-							<div class="order-c-cont"><div class="order-cont-pace">¥ {{item.total}}</div><div class="order-cont-name">{{item.product_name||item.name}}</div></div>
+							<div class="order-c-img"><img v-bind:src="getImgUrl+(item.image||storeInfo.logo)"/></div>
+							<div class="order-c-cont">
+								<div class="order-cont-pace">¥ {{item.price}}/份</div>
+								<div class="order-cont-name">{{item.product_name||item.name}}</div>
+							</div>
 							<div class="order-num">数量:  {{item.num+item.unit}}</div>
 							<!--<div class="commodity-choice comm-li-info">
 								<div class="commodity-change-j">一</div>
@@ -42,11 +45,14 @@
         	return {
         		payMoneyUrl:configuration.global.serverPath + "/api/wxpay/wxpayJSAPI",// 微信统一下单
         		orderPayList:[],
-        		payOrder:JSON.parse(sessionStorage.getItem("payOrder"))
+        		payOrder:JSON.parse(sessionStorage.getItem("payOrder")),
+        		getImgUrl:configuration.global.imgPath,
+        		storeInfo:{}
         	}
         },    	
         mounted: function () {
-            this.orderPayList = sessionStorage.getItem("prePageCode") == "shoppingHome"?JSON.parse(sessionStorage.getItem("shopCart")):this.payInit();
+        	this.storeInfo = JSON.parse(sessionStorage.getItem("storeInfo"))||{};
+            this.orderPayList = sessionStorage.getItem("prePageCode") == "orderAll" || sessionStorage.getItem("prePageCode") == "orderDetail"?this.payInit():JSON.parse(sessionStorage.getItem("shopCart"));
         },
         methods: {
         	paywxMoney:function(){

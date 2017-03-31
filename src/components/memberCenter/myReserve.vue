@@ -20,8 +20,7 @@
 					<dl class="situation"><dt>预订包厢</dt>
 						<dd>
 							<select class="r-time" name="reserveType" v-model="reserveList.reserve_id" >
-								<option value="0">大厅</option>
-								<option v-bind:value="item.id" v-for="item in reserveType" v-text="item.name"></option>
+								<option v-bind:value="item.id" v-for="(item,index) in reserveType" v-text="item.name"></option>
 							</select>
 							<span class="select-com"><img src="src/images/shop_down_arrow@2x.png"/></span>							
 						</dd>
@@ -72,7 +71,7 @@
         },    	
         mounted: function () {
             var dataNew = new Date();
-          	this.reserveList.reserve_time = dataNew.getFullYear() + "-" + this.timeDeta(dataNew.getMonth()+1) + "-" + this.timeDeta(dataNew.getDate()+1) + "T18:00:00";
+          	this.reserveList.reserve_time = dataNew.getFullYear() + "-" + this.timeDeta(dataNew.getMonth()+1) + "-" + this.timeDeta(dataNew.getDate()) + "T18:00:00";
             this.reserveInit();
         },
         methods: {
@@ -81,6 +80,7 @@
 		         	var results = response.data;
 		         	if(results.code === 200){
 		         		this.reserveType = results.data.data;
+		         		this.reserveList.reserve_id = results.data.data[0].id;
 		         	}else{
 		         		globalMethod.layerUtils.iAlert(results.message||"请求服务器失败");
 		         	}
@@ -157,7 +157,7 @@
 		bottom: -0.5rem;
 		left: 0;
 		color: red;
-		font-size: 0.5rem;
+		font-size: 0.8rem;
 		
 	}
 	#myReserve .customer{

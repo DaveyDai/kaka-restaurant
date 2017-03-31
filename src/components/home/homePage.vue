@@ -19,22 +19,22 @@
 					<img src="../../images/home_notice@2x.png"/>
 					<span>{{notice.text}}</span>
 				</div>
-				<div class="c-hotel-centent">
+				<div class="c-hotel-centent" v-on:click="goAbout">
 					<div class="c-h-in c-h-img">
 						<img v-bind:src="getimgUrl+storeInfo.logo"/>
 					</div>
 					<div class="c-h-in c-h-cent">
 						<div class="c-h-name">
-							<span>{{storeInfo.name}}</span>
+							<span v-text="storeInfo.name"></span>
 							<img src="../../images/home_right_arrow@2x.png"/>
 						</div>
 						<div class="c-h-yysj">
 							<span>营业时间:</span>
-							<span class="c-h-time">{{storeInfo.open_time+'-'+storeInfo.end_time}}</span>
+							<span class="c-h-time" v-text="storeInfo.open_time+'-'+storeInfo.end_time"></span>
 						</div>
 						<div class="c-h-phone">
 							<span>联系电话:</span>
-							<span><a href="tel:0755">{{storeInfo.phone}}</a></span>
+							<span><a href="tel:0755" v-text="storeInfo.phone"></a></span>
 						</div>
 					</div>
 					<div class="c-h-in c-h-sfyy">
@@ -43,7 +43,13 @@
 				</div>
 				<div class="c-hotel-modular">
 					<ul>
-						<li v-for="homeItem in homeMenuList" v-on:mousedown="gotoModel(homeItem)" ><div class="c-mod-img"><img v-bind:src="homeMenuLogo(homeItem.image)" /></div><div class="c-mod-ct"><div class="c-mod-name">{{homeItem.module_name}}</div><div class="c-mod-sm">{{homeItem.subtitle}}</div></div></li>
+						<li v-for="homeItem in homeMenuList" v-on:mousedown="gotoModel(homeItem)" >
+							<div class="c-mod-img"><img v-bind:src="homeMenuLogo+homeItem.image" /></div>
+							<div class="c-mod-ct">
+								<div class="c-mod-name">{{homeItem.module_name}}</div>
+								<div class="c-mod-sm">{{homeItem.subtitle}}</div>
+							</div>
+						</li>
 					</ul>
 				</div>
 				<div class="c-h-zwf"></div>
@@ -55,7 +61,7 @@
 				<div class="c-hot-hotel">
 					<div class="hot-h" v-for="hotItem in hotProductList" v-on:mousedown="shopDetails(hotItem)" >
 						<div class="hot-h-img"><img v-bind:src="getimgUrl+hotItem.image"/></div>
-						<div class="hot-h-name">{{hotItem.name}}</div>
+						<div class="hot-h-name" v-text="hotItem.name"></div>
 						<div class="hot-h-price">¥ {{hotItem.price}}/{{hotItem.unit}}</div>
 					</div>
 				</div>
@@ -130,9 +136,13 @@
         		homeBannerList: [],
         		homeMenuList: [],
         		hotProductList: [],
-        		storeInfo:{},
+        		storeInfo:{
+        			logo:"20170330/17547f168d6268fedf62028406d11640.png"
+        		},
         		isBusiness:true,
-        		notice:{"text":"优雅 休闲 浪漫的主题 特色 开启您的DIY生活空间"}
+        		notice:{"text":"优雅 休闲 浪漫的主题 特色 开启您的DIY生活空间"},
+        		homeMenuLogo:"src/images/restaurant/",
+        		getimgUrl:configuration.global.imgPath
         	}
         },    	
         mounted: function () {
@@ -144,10 +154,7 @@
 //          this.getHomeMenu();
             this.getHotProduct();
             this.getNotice();
-			setTimeout(function(){
-				document.getElementById('homePage').scrollTop=1
-			},0)
-			
+            globalMethod.setHscroll("homePage");
         },
         methods: {
 			getStoreInfo:function(){
@@ -155,6 +162,7 @@
 		         	var results = response.data;
 		         	if(results.code === 200){
 		         		 this.storeInfo = results.data[0];
+		         		 document.title = this.storeInfo.name;
 		         		 sessionStorage.setItem("storeInfo",JSON.stringify(results.data[0]));
 		         		 this.isBusiness = this.timeCheck(results.data[0].open_time,results.data[0].end_time)
 		         	}else{
@@ -175,10 +183,6 @@
 		        }, function (response) {
 		        	globalMethod.layerUtils.iAlert("连接服务器失败，请联系管理员");
 		        });
-		    },
-		    homeMenuLogo:function(logo){
-		    	return "src/images/restaurant/"+logo;
-//		    	return configuration.global.imgPath+logo;
 		    },
 			getHotProduct:function(){
 		         this.$http.post(configuration.global.serverPath + "/api/Product/getHotProduct",{shopid:configuration.global.shopid},{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
@@ -225,13 +229,11 @@
 		    	var open_hours = open_time.slice(0,open_time.indexOf(":")),open_minutes = open_time.slice(open_time.indexOf(":")+1);
 		    	var end_hours = end_time.slice(0,end_time.indexOf(":")),end_minutes = end_time.slice(end_time.indexOf(":")+1);
 		    	return open_hours == end_hours?Number(open_minutes)<=dateNew.getMinutes() && dateNew.getMinutes()<=Number(end_minutes):Number(open_hours)<=dateNew.getHours() && dateNew.getHours()<=Number(end_hours);
+		    },
+		    goAbout:function(){
+		    	this.$router.push({name:"aboutOur"});
 		    }
-        },
-	  	computed: {
-		    getimgUrl:function(){
-		    	return configuration.global.imgPath
-		    }
-	  	}        
+        }       
     }
     //轮播广告
     var queryScroller = function(v) {

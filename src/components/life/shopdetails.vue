@@ -1,6 +1,6 @@
 <template>
 	<div id="shopdetails" style="position: relative;">
-		<section class="main fixed" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
+		<section class="main fixed" id="commDetailS" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
 			<div class="con_top">
 				<a href="javascript:void(0)"><img v-bind:src="shopDetail.image" alt=""></a>
 				<div class="info">
@@ -41,6 +41,7 @@
 		},
 		mounted: function() {
 			this.shopDetail = JSON.parse(this.$route.query.shopDetail)
+			globalMethod.setHscroll("commDetailS");
 		},
 		methods: {
 			backPage: function() {

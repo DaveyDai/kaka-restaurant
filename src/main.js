@@ -7,17 +7,25 @@ require("./css/style.css")
 window.globalMethod = {};
 globalMethod.iscrollUtils = require("./js/plugins/iscroll/scripts/iscrollUtils.js");
 globalMethod.layerUtils = require("./js/plugins/layer/layer.js");
-globalMethod.setHscroll = function(elem,scrollerConHeight){}
+globalMethod.setHscroll = function(elem){
+	setTimeout(function() {
+		document.getElementById(elem).scrollTop = 1;
+	}, 0)
+	document.getElementById(elem).onscroll = function () {  
+        var topheight = document.getElementById(elem).scrollTop;
+        if(topheight<2)document.getElementById(elem).scrollTop = 1; 
+    }	
+}
 window.configuration = {
 	"global": {
 		"serverPath": "http://wx.szgulu.com/vipyun/public",//http://112.74.18.249:88/vipyun/public/index.php",
-		"imgPath":"http://112.74.18.249:88/vipyun/public/uploads/",
+		"imgPath":"http://wx.szgulu.com/vipyun/public/uploads/",
 		"shopid":localStorage.getItem("shopid")
 	}
 };
 //启动路由
 import router from './router/router'
-new Vue({router:router}).$mount('#app');
+new Vue({mode:'history',router:router}).$mount('#app');
 //底部菜单栏
 var footerElem = document.getElementById("footer").getElementsByTagName("li"), footerName = ["首页","菜单","购物车","会员中心"];
 for(var i = footerElem.length;i--;){
@@ -43,7 +51,7 @@ if(ua.indexOf('micromessenger') != -1&&code&&!sessionStorage.getItem("token")){
 }
 //购物车状态全局管理
 globalMethod.changeLocalStorage = function(key,item,callback,elem){
-	var commodity = {id:Number(item.id),name:item.name,unit:item.unit,price:item.price,point:item.point,num:1};//构建商品
+	var commodity = {id:Number(item.id),name:item.name,unit:item.unit,price:item.price,point:item.point,num:1,image:item.image};//构建商品
 	var shopCart = JSON.parse(localStorage.getItem("shopCart"))||[];
 	var hasShop = false,commodNum = 0;
 	for(var ii = 0,shopLength = shopCart.length;ii < shopLength;ii++){

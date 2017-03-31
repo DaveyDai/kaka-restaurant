@@ -15,7 +15,7 @@
 					<span>重输密码<em>*</em></span><input type="password" name="pwdr" id="pwdr" v-on:blur="checkPwd()" placeholder="请再一次输入密码" maxlength="20" />
 					<p id="checkPwdS">*两次密码输入的不一致</p>
 				</div>
-				<div class="pass-input">
+				<!--<div class="pass-input">
 					<span>邮箱</span><input type="email" name="email" v-model="regParam.email" placeholder="请输入邮箱" maxlength="30" />
 				</div>
 				<div class="pass-input">
@@ -29,7 +29,7 @@
 				</div>
 				<div class="pass-input">
 					<span>QQ号</span><input type="tel" name="qq" v-model="regParam.qq" placeholder="请输入QQ号" maxlength="13"/>
-				</div>
+				</div>-->
 				<div class="register-btn">
 					<div class="register-go" v-on:mousedown="goRegister()" >注册</div>
 				</div>
@@ -55,6 +55,7 @@
         	}
         },    	
         mounted: function () {
+        	globalMethod.setHscroll("register");
         },
         methods: {
         	isEnNumeric:function(strValue){
@@ -143,7 +144,7 @@
 		padding-bottom: 0.16666666666666666rem;
 	}
 	.r-passwd > input{
-		margin-top: 1.5rem;
+		/*margin-top: 1.5rem;*/
 	}
 	.r-passwd p{
 		display: none;

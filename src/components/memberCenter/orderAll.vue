@@ -108,9 +108,10 @@
 		         		document.getElementById("has_orders").style.display = "none"
 		         		document.getElementById("no_order").style.display = "block"		         		
 		         	}
+		         	globalMethod.setHscroll("orderAll");
 		        }, function (response) {
 		        	globalMethod.layerUtils.iAlert("连接服务器失败，请联系管理员");
-		        });			    		
+		        });	
 		    },
 		    orderDetail:function(item){
 		    	sessionStorage.setItem("orderDetail",JSON.stringify(item));
