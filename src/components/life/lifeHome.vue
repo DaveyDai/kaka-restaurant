@@ -1,19 +1,21 @@
 <template>
-	<div id="lifeHome" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
+	<div id="lifeHome" style="position: relative;">
 		<header class="header">
 			<div class="life-navigationBar">
 				<div class="navB-content" v-for="(item,index) in categoryList" v-bind:class="{active:index===0}" v-on:mousedown="categoryChoice(item,$event)" >{{item.name}}</div>
-			</div>	
-			<div class="screen-hotel">
-				<a class="screen-input" href="javascript:void(0);" v-on:click="screenExplant()" >
-					<img src="../../images/life_search@2x.png" />
-					<span>请输入商家或商家名称</span>
-				</a>
-				<input class="hotel-screen-input" type="text" name="screen" id="screenInput" value="" v-on:blur="screenInput(true)" v-model="screenValue" />
-				<a class="screen-th-hotel" href="javascript:void(0);" v-on:mousedown="getProduct(false,true)" >搜索</a>
+			</div>			
+			<div class="screen-hotel screen-div">
+				<div class="screen-hotel">
+					<a class="screen-input" href="javascript:void(0);" v-on:click="screenExplant()" >
+						<img src="../../images/life_search@2x.png" />
+						<span>请输入商家或商家名称</span>
+					</a>
+					<input class="hotel-screen-input" type="text" name="screen" id="screenInput" value="" v-on:blur="screenInput(true)" v-model="screenValue" />
+					<a class="screen-th-hotel" href="javascript:void(0);" v-on:mousedown="getProduct(false,true)" >搜索</a>					
+				</div>
 			</div>			
 		</header>		
-		<section class="main fixed">
+		<section id="lifeScroll" class="main fixed" style="position: relative;height:calc(100vh - 9.32rem);overflow-x: hidden;overflow-y: auto;top: 6.7rem;">
 			<article class="content">
 				<div class="hotel-list">
 					<ul id="productAll">
@@ -81,7 +83,6 @@
         mounted: function () {
         	this.getStoreInfo();
         	this.getProduct();
-        	globalMethod.setHscroll("lifeHome");
         },
         methods: {
 			getStoreInfo:function(){
@@ -117,6 +118,7 @@
 		         	}else{
 		         		globalMethod.layerUtils.iAlert(results.message||"请求服务器失败");
 		         	}
+		         	globalMethod.setHscroll("lifeScroll");
 		        }, function (response) {
 		        	globalMethod.layerUtils.iAlert("连接服务器失败，请联系管理员");
 		        });

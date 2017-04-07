@@ -112,23 +112,25 @@
 	}
 	.pass-input{
 		width: 84%;
-		height: 4rem;
-		border-bottom: 1px solid #ccc;
+		height: auto;
+		border-bottom: 1px solid #E5E5E5;
 		margin: 0 8%;
 		padding-top: 1.5rem;
 	}
 	.pass-input > span{
-	    font-size: 1.1333333333333333rem;
+	    font-size: 1.2rem;
 	    color: #333;
 	    display: inline-block;
-	    width: 25%;
-	    text-align: right;		
+	    width: 26%;
+	    text-align: right;	
+	    height: 2.5rem;	
 	}
 	.pass-input > input{
 		margin-left: 6%;
 		width: 68%;
 		height: 2rem;
-		font-size: 1rem;
+		line-height: 2rem;
+		font-size: 1.1rem;
 		color: #999;
 		border: 0;
 	}
@@ -136,12 +138,9 @@
 		color: red;
 	}
 	.r-passwd{
-		padding-top: 0;
-		height: auto;
+	
 	}
 	.r-passwd > span{
-		margin-top: 1.5rem;
-		padding-bottom: 0.16666666666666666rem;
 	}
 	.r-passwd > input{
 		/*margin-top: 1.5rem;*/
@@ -157,15 +156,14 @@
 		padding-top: 2rem;
 	}
 	.register-go{
-		width: 80%;
 		height: 2.6666666666666665rem;
 		line-height: 2.6666666666666665rem;
 		background-color: #ff5959;
 		text-align: center;
-		font-size: 1rem;
+		font-size: 1.2rem;
 		color: #fff;
 		border-radius: 40px;
-		margin: auto;
+		margin: 0 8%;
 	}
 	.login-head{
 		position: relative;

@@ -201,7 +201,7 @@
 		font-size: 0.9333333333333333rem;
 		color: #000000;
 		text-align: center;
-		padding-top: 0.5333333333333333rem;
+		padding-top: 0.25rem;
 	}
 	
 	.nmenlist {
@@ -239,7 +239,7 @@
 		font-size: 0.9333333333333333rem;
 		color: #000000;
 		text-align: center;
-		padding-top: 0.5333333333333333rem;
+		padding-top: 0.25rem;
 	}
 	
 	.memberHome .account {
@@ -249,7 +249,6 @@
 		padding-top: 1.2rem;
 		margin-bottom: 1.4333333333333333rem;
 		text-align: center;
-		padding-left: 7%;
 		margin-top: 0;
 	}
 	
@@ -262,7 +261,8 @@
 		text-align: center;
 		background-color: white;
 		border: 1px solid #f7353c;
-		border-radius: 10px;
+		border-radius: 0.3rem;
+		margin:0 auto;
 	}
 	/*签到弹出层*/
 	
@@ -292,12 +292,12 @@
 	.sign-page-tips .tips-title-ok {
 		position: relative;
 		width: 100%;
-		height: 3.6666666666666665rem;
+		height: 4rem;
 		background-color: #fff6da;
 		border-top-left-radius: 0.7333333333333333rem;
 		border-top-right-radius: 0.7333333333333333rem;
 		font-size: 1.2rem;
-		color: #f05638;
+		color: #d2573c;
 		font-weight: bold;
 		display: -webkit-flex;
 		display: flex;
@@ -333,8 +333,8 @@
 	
 	.sign-page-tips .tips-title-silist {
 		width: 100%;
-		height: 5.833333333333333rem;
-		background-color: #14B6F5;
+		height: 6rem;
+		background-color: #f26868;
 		border-bottom-left-radius: 0.7333333333333333rem;
 		border-bottom-right-radius: 0.7333333333333333rem;
 		color: #fff;
@@ -342,16 +342,16 @@
 	}
 	
 	.sign-page-tips .tips-title-silist p {
-		font-size: 0.9333333333333333rem;
-		padding: 0.9333333333333333rem 0 0.3333333333333333rem 0;
+		font-size: 0.95rem;
+		padding: 0.9333333333333333rem 0 0.9rem 0;
 	}
 	
 	.sign-page-tips .sign-tipss-to {
-		font-size: 0.8rem;
-		border: 2px solid #fff;
+		font-size: 0.85rem;
+		border: 1px solid #fff;
 		border-radius: 26px;
 		display: inline-block;
-		padding: 0.16666666666666666rem 1rem;
+		padding: 0.4rem 1.4rem;
 	}
 	
 	.sign-page-tips .sign-tips-img {

@@ -10,7 +10,7 @@
 			   </div>				
 				<div class="myReser-conter" id="reserall">
 					<li v-for="item in reserveList" >
-						<div class="myReser-conter-img"><img v-bind:src="item.image||storeInfo.logo" /></div>
+						<div class="myReser-conter-img"><img v-bind:src="getImgUrl+(item.image||storeInfo.logo)" /></div>
 						<div class="myRescon-explant">
 							<p class="r-explant-title" v-text="storeInfo.name"></p>
 							<p>类型：&nbsp;&nbsp;<em v-text="item.reserve_name||'大厅'"></em></p>
@@ -56,7 +56,8 @@
         			pageAll:0
         		},
         		reserveList:[],
-        		storeInfo:{}
+        		storeInfo:{},
+        		getImgUrl:configuration.global.imgPath
         	}
         },    	
         mounted: function () {
@@ -88,11 +89,13 @@
 <style>
 	.myReser-conter{
 		width: 100%;
-		background-color: #fff;
 	}
 	.myReser-conter li{
-		height: 7.2rem;
+		height: 7.5rem;
 		border-bottom: 1px solid #E5E5E5;
+		width:100%;
+		background-color:#fff;
+		margin-bottom:0.4rem;
 	}
 	.myReser-conter li > div{
 		float: left;
@@ -104,15 +107,14 @@
 	}
 	.myReser-conter li .myRescon-explant{
 		font-size: 0.8rem;
-		color: #333;
+		color: #666;
 		line-height: 1.2rem;
 		margin-top: 0.5rem;
 	}
 	.myReser-conter li .r-explant-title{
 		line-height: 1.5rem;
-		font-size: 0.9333333333333333rem;
+		font-size: 1rem;
 		color: #000;
-		font-weight: bold;
 	}
 	.rescon-start{
 	    position: absolute;
@@ -135,7 +137,7 @@
 	    text-align:center;
 	    height:3rem;
 	    line-height:3rem;
-	    border-bottom:2px solid gainsboro;
+	    border-bottom:1px solid #e5e5e5;
 	    -webkit-flex:1;
 	    flex:1;
 	}

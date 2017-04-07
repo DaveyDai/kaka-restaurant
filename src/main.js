@@ -26,6 +26,7 @@ window.configuration = {
 //启动路由
 import router from './router/router'
 new Vue({mode:'history',router:router}).$mount('#app');
+
 //底部菜单栏
 var footerElem = document.getElementById("footer").getElementsByTagName("li"), footerName = ["首页","菜单","购物车","会员中心"];
 for(var i = footerElem.length;i--;){

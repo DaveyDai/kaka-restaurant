@@ -1,6 +1,6 @@
 <template>
 	<div id="shoppingHome" style="position: relative;">
-		<section class="main fixed" id="has_shopping">
+		<section class="main fixed" id="has_shopping" style="background-color:#e5e5e5;">
 			<article class="content" id="shopHomePage" style="position: relative;height:calc(100vh - 6.26rem);overflow-x: hidden;overflow-y: auto;">
 				<div class="shoping-commoditys">
 					<li v-for="item in shopOrder.order" >
@@ -28,7 +28,7 @@
 				</div>-->
 				<div class="pice-mode">
 					<div class="pice-mode-n o-details-n"><span class="pay-tips"></span><span class="pay-tips-name">支付方式</span></div>
-					<div class="pice-mode-choice"><span v-for="(item,index) in payType" v-bind:class="{active:index==0}" v-on:mousedown="changePay(index,$event)" >{{item}}</span></div>
+					<div class="pice-mode-choice"><span v-for="(item,index) in payType" v-bind:class="{active:item.pay_id==shopOrder.pay_type}" v-on:mousedown="changePay(item.pay_id,$event)" v-text="item.pay_name"></span></div>
 				</div>
 				<div class="pice-mode order-mode" style="display: none;">
 					<div class="pice-mode-n o-details-n"><span>订单类型</span><img class="orders-hide-img" src="../../images/shop_down_arrow@2x.png"/></div>
@@ -36,11 +36,11 @@
 				</div>
 				<div class="order-information">
 					<div class="pice-mode-n o-details-n"><span class="pay-tips"></span><span class="pay-tips-name">订单备注</span></div>
-					<div class="o-room-infor"><span>店内桌号</span><input type="tel" placeholder="在此输入桌号*" maxlength="8" v-model="shopOrder.room_id" /></div>
-					<div class="o-room-infor"><span>配送地址</span><input type="tel" placeholder="如需配送请填写*" maxlength="80" v-model="shopOrder.address" /></div>
-					<div class="o-room-infor"><span>电话</span><input type="tel" placeholder="在此输入电话" maxlength="11" v-model="shopOrder.phone" /></div>
+					<div class="o-room-infor"><span>店内桌号<em>*</em></span><input type="tel" placeholder="在此输入桌号" maxlength="8" v-model="shopOrder.room_id" /></div>
+					<div class="o-room-infor"><span>配送地址<em>*</em></span><input type="tel" placeholder="如需配送请填写" maxlength="80" v-model="shopOrder.address" /></div>
+					<div class="o-room-infor"><span>电话<em>*</em></span><input type="tel" placeholder="在此输入电话" maxlength="11" v-model="shopOrder.phone" /></div>
 					<div class="o-room-infor"><span>称呼</span><input type="text" placeholder="在此输入称呼" maxlength="20" v-model="shopOrder.name" /></div>
-					<div class="o-room-beizhu"><span>备注说明</span><div><textarea name="" rows="" cols="" placeholder="在此输入备注，如。。。。。" v-model="shopOrder.remark" ></textarea></div></div>
+					<div class="o-room-beizhu"><span>备注说明</span><div><textarea name="" rows="" cols="" placeholder="例如:少辣,多辣..." v-model="shopOrder.remark"  style="padding-left: 0.7rem;"></textarea></div></div>
 				</div>
 			</article>
 			<!--<div style="position: relative;">--> 
@@ -51,7 +51,7 @@
 			</div>	
 			<!--</div>-->
 		</section>
-		<div id="no_shopping" class="shoping-no" style="display: none;">
+		<div id="no_shopping" class="shoping-no" style="display: none;height:calc(100vh);background-color:#fff;">
 			<div class="content">
 				<ul class="">
 					<li>
@@ -74,7 +74,7 @@
         			order:[],   //订单数组
         			token:sessionStorage.getItem("token")||"",
         			type:0,     //订单类型(0:店内消费，1：外送业务，2：店内自取)
-        			pay_type:0, //付款方式（0：货到付款，1：余额支付，2：店内消费，3：微信支付）
+        			pay_type:3, //付款方式（0：货到付款，1：店内消费，2：余额支付，3：微信支付）
         			room_id:"",  //房间号
         			name:"",
         			phone:"",
@@ -86,11 +86,12 @@
         		shopDown:{
         			comNum:0
         		},
-        		payType:["到付","店内消费","余额支付","微信支付"]
+        		payType:[]
         	}
         },    	
         mounted: function () {
 			this.initShopping();
+			this.getPayType();
 			globalMethod.setHscroll("shopHomePage");
         },
         methods: {
@@ -156,14 +157,23 @@
 		    		globalMethod.layerUtils.iAlert("如需配送请填写手机号");
 		    		return false;
 		    	}
+		    	if(this.shopOrder.phone.replace(/\s/g,"").length !== 0 && !/^(13|14|15|17|18)[0-9]{9}$/.test(this.shopOrder.phone)){
+		    		globalMethod.layerUtils.iAlert("手机号码格式不正确");
+		    		return false;
+		    	}
 		    	return true;
 		    },
-		    changShow:function(even){
-//		    	var height = $(even.target).siblings(".pice-mode-choice").is(":visible")&&"2rem"||"6rem";
-//		    	$(even.target).siblings(".pice-mode-choice").slideToggle(300,function(){
-//		    		$(even.target).toggleClass("is-show");
-//		    	});
-//		    	$(even.target).parent().animate({height:height},300);
+		    getPayType:function(){
+		        this.$http.post(configuration.global.serverPath + "/api/order/getPayType",this.shopOrder,{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
+		         	var results = response.data;
+		         	if(results.code === 200){
+		         		this.payType = results.data;
+		         	}else{
+		         		globalMethod.layerUtils.iAlert(results.message||"请求服务器失败");
+		         	}
+		        }, function (response) {
+		        	globalMethod.layerUtils.iAlert("连接服务器失败，请联系管理员");
+		        });			    	
 		    }
         }
     }

@@ -4,20 +4,20 @@
 			<article class="content">
 				<div class="bgstyle clear customer">
 					<dl>
-						<dt>预约时间</dt>
+						<dt>预约时间<em>*</em></dt>
 						<dd id="reserve_time" >
 							<input class="r-time" type="datetime-local" name="" id="dateDefault" v-model="reserveList.reserve_time"/>
 							<span class="select-com"><img src="src/images/shop_down_arrow@2x.png"/></span>
 						</dd>
 						<p id="reserve_timeC" >*请填写预约人数</p>
 					</dl>
-					<dl><dt>预约人数</dt>
+					<dl><dt>预约人数<em>*</em></dt>
 						<dd>
 							<input v-model="reserveList.number" class="radius5 inputRes" type="tel" placeholder="填写人数，以便我们安排" maxlength="6">
 						</dd>
 						<p id="numberC" >*请填写预约人数</p>
 					</dl>
-					<dl class="situation"><dt>预订包厢</dt>
+					<dl class="situation"><dt>预订包厢<em>*</em></dt>
 						<dd>
 							<select class="r-time" name="reserveType" v-model="reserveList.reserve_id" >
 								<option v-bind:value="item.id" v-for="(item,index) in reserveType" v-text="item.name"></option>
@@ -25,15 +25,15 @@
 							<span class="select-com"><img src="src/images/shop_down_arrow@2x.png"/></span>							
 						</dd>
 					</dl>
-					<dl><dt>您的手机号</dt>
+					<dl><dt>您的手机号<em>*</em></dt>
 						<dd><input v-model="reserveList.phone" class="radius5 inputRes" type="tel" name="tel" value="" maxlength="11" datatype="Require" placeholder="填写电话，以便我们联系您"></dd>
 						<p id="phoneC" >*请填写联系手机号</p>
 					</dl>
-					<dl><dt>您的姓名</dt>
+					<dl><dt>您的姓名<em>*</em></dt>
 						<dd><input v-model="reserveList.name" class="radius5 inputRes" type="text" name="xm" value="" maxlength="10" datatype="Require" placeholder="在这里输入您的姓名/称呼"></dd>
 						<p id="nameC" >*请填写您的姓名</p>
 					</dl>
-					<dl><dt>您的性别</dt>
+					<dl><dt>您的性别<em>*</em></dt>
 						<dd>
 							<select class="r-time" name="reserveType" v-model="reserveList.sex" >
 								<option value="0">男</option>
@@ -154,7 +154,7 @@
 	#myReserve p{
 		display: none;
 		position: absolute;
-		bottom: -0.5rem;
+		bottom: -1rem;
 		left: 0;
 		color: red;
 		font-size: 0.8rem;
@@ -164,6 +164,7 @@
 		background-color: #fff;
 		font-size: 1rem!important;
 	}
+	#myReserve .customer dl dt em{color:#f7353c;}
 	#myReserve .customer dl{
 		height: 2.8rem;
 		display: -webkit-flex;
@@ -171,6 +172,9 @@
 		-webkit-align-items: center;
 		align-items: center;
 		position: relative;
+		border-bottom: 1px solid #E5E5E5;
+		margin: 0.1rem 0.33rem;
+		line-height:2.8rem;
 	}		
 	#myReserve .customer > dl > dt{
 		display: inline-block;
@@ -182,7 +186,7 @@
 		text-align: left;		
 		overflow: hidden;
 		width: 30%;
-		padding:0 1rem;		
+		padding:0 0.8rem;		
 		color: #333;
 	}
 	#myReserve .customer > dl > dd{
@@ -227,5 +231,7 @@
 		width: 0.8333333333333334rem;
 		height: 0.4666666666666667rem;
 	}
-	
+	#myReserve .beizhushuom textarea{
+		padding-top: 0.6rem;
+	}
 </style>

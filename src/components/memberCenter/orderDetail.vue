@@ -214,7 +214,7 @@
 		flex: 1;
 		padding-left: 0.8rem;
 		height: 4.833333333333333rem;
-		font-size: 0.9333333333333333rem;
+		font-size: 0.93rem;
 		color: #666666;
 	}
 	
@@ -223,6 +223,7 @@
 	}
 	
 	.detail-consume .detail-order-content1 .detail-order-content1-pay {
+		font-size: 1rem;
 		padding-top: 0.2rem;
 	}
 	
@@ -238,12 +239,12 @@
 	
 	.detail-consume .detail-order-content2 .detail-order-content2-number {
 		padding-top: 0.3333333333333333rem;
-		font-size: 0.8rem
+		font-size: 1rem
 	}
 	
 	.detail-consume .detail-order-content2 .detail-order_content2-pay {
 		padding-top: 0.16666666666666666rem;
-		font-size: 1rem;
+		font-size: 1.1rem;
 		color: #d5383e;
 	}
 	/*列表4*/
@@ -266,7 +267,7 @@
 	}
 	
 	.detail-allconsum-content>p {
-		padding-left: 0.8rem;
+		padding-left: 0.93rem;
 	}
 	
 	.detail-allconsum-content>p>.span2 {

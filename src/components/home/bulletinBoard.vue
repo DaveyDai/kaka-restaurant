@@ -94,7 +94,7 @@
 		line-height: 2rem;
 		font-size: 1rem;
 		color: #333;
-		font-weight: bold;
+		font-weight: normal;
 	}
 	.bulls-mess-contenx .bull-mess-c{
 		font-size: 0.87rem;

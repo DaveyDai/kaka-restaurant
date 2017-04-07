@@ -38,10 +38,6 @@ module.exports = {
 			{test: /\.css$/,loader: 'style-loader!css-loader'},
 			// 小于10KB的图片会自动转成dataUrl
 			{test: /\.(png|jpe?g|gif)$/,loader: 'url-loader?limit=8192'},
-//			{test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
-//          	loaders: ['url?limit=10240&name=img/[hash:8].[name].[ext]',
-//              	'image?{bypassOnDebug:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}']
-//          },
 			//html模板编译？
 			{test: /\.(html|tpl)$/,loader: 'html-loader'}
 		]

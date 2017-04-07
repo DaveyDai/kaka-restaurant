@@ -1,23 +1,26 @@
 <template>
 	<div id="shopdetails" style="position: relative;">
-		<section class="main fixed" id="commDetailS" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
-			<div class="con_top">
-				<a href="javascript:void(0)"><img v-bind:src="shopDetail.image" alt=""></a>
+		<section class="main fixed" id="commDetailS" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;background-color:#fafafa;">
+			<div class="con_top" style="background-color:#fff;">
+				<a href="javascript:void(0)"><img v-bind:src="geturl+shopDetail.image" alt=""></a>
 				<div class="info">
 					<p>{{shopDetail.name}}</p>
 					<span>积分兑换：{{shopDetail.point*50}}</span><span>配送费：0元</span>
-					<!--<span class="span2">￥158.00/条</span>-->
+					<span class="span2">￥{{shopDetail.price}}/{{shopDetail.unit}}</span>
 				</div>
 			</div>
-			<div class="con_bottom">
+			<div class="con_bottom" style="background-color:#fff;">
 				<div class="con_bottom_title">详情说明</div>
-				<a href="javascript:void(0)"><img src="../../images/restaurant/menu_detail_image@2x.png" alt=""></a>
+				<div class="detali-img">
+					<img src="../../images/restaurant/menu_detail_image@2x.png" alt="">
+					<img class="back-bg-img" src="../../images/restaurant/bg_img@2x.png" alt="" />
+				</div>
 				<ul>
 					<li>
-						<p><span class="cy-li-name">品名：</span><span class="cy-li-contont">重庆豆花烤鱼【凌波鱼】</span></p>
-						<p><span class="cy-li-name"> 辣度：</span><span class="cy-li-contont">中辣</span></p>
+						<p><span class="cy-li-name">品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span><span class="cy-li-contont">重庆豆花烤鱼【凌波鱼】</span></p>
+						<p><span class="cy-li-name">辣&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：</span><span class="cy-li-contont">中辣</span></p>
 						<p><span class="cy-li-name">菜品特色：</span><span class="cy-li-contont">是长居销量榜top1的明星产品，原料中的贵州山区原生态辣椒、山胡椒、薄荷、鱼腥草根等，使得口味椒香麻辣、纯正浓厚。用盐卤点制的豆花更是不愿甘当配角，简直比烤鱼还要香嫰，十足一副喧宾得主的架势！</span></p>
-						<p><span class="cy-li-name">提示：</span><span class="cy-li-contont">吃不惯鱼腥草和薄荷叶的客户们记得告知服务员取消哦~</span></p>
+						<p><span class="cy-li-name">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;示：</span><span class="cy-li-contont">吃不惯鱼腥草和薄荷叶的客户们记得告知服务员取消哦~</span></p>
 					</li>
 				</ul>
 			</div>
@@ -26,7 +29,7 @@
 			</div>-->
 		</section>
 		<div class="detailFooter">
-			<span class="bottom-money"><em>￥{{shopDetail.price}}</em>  元/份</span>
+			<span class="bottom-money"><em>￥{{shopDetail.price}}</em>  元/{{shopDetail.unit}}</span>
 			<span @click="payShoping()" class="buttom but-shoping" >加入购物车</span>
 			<!--<span class="buttom but-pay">立即购买</span>-->
 		</div>
@@ -36,7 +39,8 @@
 	export default {
 		data: function() {
 			return {
-				shopDetail: {}
+				shopDetail: {},
+				geturl:configuration.global.imgPath
 			}
 		},
 		mounted: function() {
@@ -74,10 +78,16 @@
 	#shopdetails {
 		background-color: #fff;
 	}
+	#shopdetails .detali-img{
+		position: relative;
+		width: 100%;
+		height: auto;
+	}
 	
 	.con_top {
 		padding: 0.6666666666666666rem 0.6666666666666666rem 0 0.6666666666666666rem;
-		border-bottom: 1px solid gainsboro;
+		border-bottom: 1px solid #E5E5E5;
+		
 	}
 	
 	.con_top a {
@@ -99,24 +109,32 @@
 		margin-top: 0.5rem;
 		font-size: 1rem;
 		color: #303030;
-		margin-bottom: 0.7rem;
 		overflow: hidden;
+		letter-spacing:0.08rem;
 	}
 	
 	.con_top .info span {
 		color: #666666;
-		font-size: 0.7333333333333333rem;
+		font-size: 0.9rem;
 		overflow: hidden;
+		
 	}
 	
 	.con_top .info span:nth-of-type(1) {
 		margin-right: 2.6666666666666665rem;
+		line-height: 1.8rem;
+	}
+
+	.con_top .info span:nth-of-type(2){
+		letter-spacing:0.06rem;
 	}
 	
 	.con_top .info .span2 {
 		display: block;
 		font-size: 0.9333333333333333rem;
-		color: #d5383e
+		color: #d5383e;
+		margin-bottom:0.5rem;
+		letter-spacing:0.04rem;
 	}
 	
 	.con_bottom {
@@ -124,7 +142,8 @@
 		background: white;
 		margin-top: 0.6666666666666666rem;
 		margin-bottom: 1.5rem;
-		border-top: 1px solid gainsboro;
+		border-top: 1px solid #E5E5E5;
+
 	}
 	
 	.con_bottom .con_bottom_title {
@@ -132,22 +151,18 @@
 		font-size: 1rem;
 		height: 3.033333333333333rem;
 		padding-top: 0.6rem;
-		border-bottom: 1px solid gainsboro;
+		border-bottom: 1px solid #E5E5E5;
 	}
 	
-	.con_bottom a {
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-	
-	.con_bottom a img {
-		border-top: 1px solid #666;
+	.con_bottom img {
 		margin: 0.8rem 0 0.8rem 0;
 		width: 100%;
 		height: 8.9rem;
 	}
-	
+	.con_bottom .back-bg-img{
+		position: absolute;
+		top: 0;
+	}
 	.con_bottom ul {
 		padding-left: 0.6666666666666666rem;
 	}
@@ -155,10 +170,11 @@
 	.con_bottom ul li {
 		color: #333333;
 		font-size: 0.8rem;
+		padding-bottom:0.8rem;
 	}
 	
 	.con_bottom ul li p {
-		font-size: 0.8rem;
+		font-size: 0.933rem;
 		color: #333333;
 		display: -webkit-flex;
 		display: flex;
@@ -170,11 +186,13 @@
 	
 	.con_bottom>ul>li>p .cy-li-name {
 		text-align: left;
-		width: 20%
+		width: 22%;
+		letter-spacing:0.04rem;
 	}
 	
 	.con_bottom>ul>li>p .cy-li-contont {
-		width: 80%
+		width: 80%;
+		letter-spacing:0.08rem;
 	}
 	
 	.buyCar {
@@ -218,26 +236,27 @@
 		color: #666;
 	    display: inline-block;
 	    height: 3.26rem;
-	    line-height: 3.26rem;		
+	    line-height: 3.26rem;	
+	    	
 	}
 	
 	.detailFooter .bottom-money>em {
 		font-size: 1.2rem;
 		color: #D5383E;
 		font-weight: 600;
+		letter-spacing:0.05rem;
 	}
 	
 	.detailFooter .buttom {
 		display: inline-block;
-		border: 1px solid #D5383E;
+		border: 1px solid #f7353c;
 		border-radius: 25px;
 		font-size: 0.9333333333333333rem;
-		padding: 0.2rem 0.7rem;
+		padding: 0.4rem 0.7rem;
 	}
 	
 	.detailFooter .but-shoping {
-		margin-right: 0.7rem;
-		color: #D5383E;
+		color: #f7353c;
 	}
 	
 	.detailFooter .but-pay {

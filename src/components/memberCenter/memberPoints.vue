@@ -77,10 +77,11 @@
 	}
 	.vipcard2 .vipmm{
 	    background:#fff;
-	    padding-top:0.4666666666666667rem;
+	    padding-top:0;
 	    padding-left:0.8rem;
 	    padding-right:0.8rem;
 	    height:2.6rem;
+	    line-height:2.6rem;
 	
 	
 	
@@ -108,6 +109,6 @@
 	.vipcard2 .vippr>p{
 	    font-size:0.8rem;
 	    color:#666666;
-	
+		margin-top:0.25rem;
 	}
 </style>

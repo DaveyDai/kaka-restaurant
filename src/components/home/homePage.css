@@ -42,16 +42,20 @@
 .num_list span.current{
 	background:#eabe50;}
 /*内容*/	
+/*广告*/
 .c-hotel-tall{
 	height: 2.2666666666666666rem;
-	/*line-height: 2.2666666666666666rem;*/
 	margin: 0.67rem 0.8rem 0 0.8rem;
 	background-color: #fff;
 	border-radius: 0.46rem;
+	overflow: auto;
+}
+.c-hotel-tall .hotel-tall-gd{
+	height: 100%;
 	display: flex;
 	display: -webkit-flex;
 	-webkit-align-items: center;
-	align-items: center;
+	align-items: center;	
 }
 .c-hotel-tall img{
 	width: 0.9333333333333333rem;
@@ -59,9 +63,22 @@
 	margin: -1px 0.3rem 0 0.67rem;
 }
 .c-hotel-tall span{
-	font-size: 0.8rem;
+	font-size: 0.85rem;
 	color: #363636;
 }
+@-webkit-keyframes homeAn{
+	0% {transform: translateY(0);opacity: 1;}
+	10% {transform: translateY(-1.7rem);opacity: 1;}
+	11% {transform: translateY(-1.7rem);opacity: 0;}
+	12% {transform: translateY(1.6rem);opacity: 0;}
+	13% {transform: translateY(1.4rem);opacity: 1;}
+	23% {transform: translateY(0);opacity: 1;}
+	100% {transform: translateY(0);opacity: 1;}
+}
+.c-hotel-tall .hotel-tall-gd span{
+	-webkit-animation: homeAn 2.5s linear infinite;
+}
+/*店铺信息*/
 .c-hotel-centent{
 	position: relative;
 	margin-top: 0.6666666666666666rem;
@@ -85,6 +102,12 @@
 	position: relative;
 	top: 1.2666666666666666rem;
 }
+.c-hotel-centent .c-h-cent .c-h-name{
+	display: flex;
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	align-items: center;
+}
 .c-hotel-centent .c-h-cent .c-h-name span{
 	font-size: 1rem;
 	line-height: 1.1666666666666667rem;
@@ -93,23 +116,26 @@
 .c-hotel-centent .c-h-cent .c-h-name img{
 	width: 0.4666666666666667rem;
 	height: 0.8rem;
-	margin: -0.4rem 0 0 0.4666666666666667rem;
+	margin-left: 0.4666666666666667rem;
 }
 .c-hotel-centent .c-h-cent .c-h-yysj{
-	font-size: 0.8rem;
+	font-size: 0.93rem;
 	color: #363636;
+	line-height: 1.7rem;
 }
 .c-hotel-centent .c-h-time{
 	margin-left: 0.9333333333333333rem;
+	letter-spacing: 0.02rem;
 } 
 .c-hotel-centent .c-h-phone{
-	font-size: 0.8rem;
+	font-size: 0.93rem;
 	line-height: 1.1666666666666667rem;
 	color: #363636;
 }
 .c-hotel-centent .c-h-phone a{
 	margin-left: 0.9333333333333333rem;
 	color: #e3722a;
+	letter-spacing: 0.02rem;
 }
 .c-h-sfyy{
 	position: absolute;
@@ -122,7 +148,7 @@
 	text-align: center;
 	width: 3.4rem;
 	height: 1.4rem;
-	line-height: 1.4rem;
+	/*line-height: 1.4rem;*/
 	border-radius: 4px;
 	border: 1px solid #363636;	
 	color: #363636;	
@@ -158,7 +184,7 @@
 	float: left;
 }
 .c-hotel-modular ul li .c-mod-img{
-	margin: -0.3rem 0.1rem 0 0.8rem;
+	margin: 0 0.1rem 0 0.8rem;
 	height: 5.06rem;
 	line-height: 5.06rem;
 }
@@ -177,7 +203,7 @@
 	color: #000;
 }
 .c-hotel-modular ul li .c-mod-ct .c-mod-sm{
-	font-size: 0.8rem;
+	font-size: 0.85rem;
 	color: #666;
 	white-space: nowrap;
 	overflow: hidden;

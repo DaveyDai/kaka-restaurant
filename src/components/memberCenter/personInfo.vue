@@ -18,16 +18,9 @@
 					<dl><dt>登陆密码</dt>
 						<dd><input class="borderstyle radius5" v-model="personInfo.password" type="password" name="passwordone" placeholder="需要修改密码时输入"></dd>
 					</dl>
-					<dl><dt>重复密码</dt>
+					<dl style="border:0;"><dt>重复密码</dt>
 						<dd><input id="checkPwd" class="borderstyle radius5" type="password" name="passwordsecond" value="" placeholder="再次输入一次刚才的密码"></dd>
 						<p id="checkPwds" >*两次密码不一致</p>
-					</dl>
-					<dl class="r-address"><dt>地址 </dt>
-						<dd><input name="dz" v-model="personInfo.address" type="text" class="borderstyle radius5" maxlength="50" placeholder="在这里补充您的地址"></dd>
-					</dl>					
-					<dl><dt>生日</dt>
-						<dd><input v-model="personInfo.birthday" class="borderstyle radius5" type="date" placeholder="格式为:yyyy-mm-dd或者yyyy/mm/dd"></dd>
-						<p id="checkDeta" >*日期格式不正确</p>
 					</dl>
 					<!--<dl id="UdateChoose"><dt>&nbsp;生日选择</dt>
 						<dd>
@@ -38,6 +31,17 @@
 							</div>
 						</dd>
 					</dl>-->
+				</div>
+				<div class="bgstyle clear customer" style="margin-top:0.5rem;">
+					<dl class="r-address"><dt>地址 </dt>
+						<dd><input name="dz" v-model="personInfo.address" type="text" class="borderstyle radius5" maxlength="50" placeholder="在这里补充您的地址"></dd>
+					</dl>					
+					<dl style="border:0;"><dt>生日</dt>
+						<dd><input v-model="personInfo.birthday" class="borderstyle radius5" type="date" placeholder="格式为:yyyy-mm-dd或者yyyy/mm/dd" style="background-color: #fff;width:98%;">
+							<span class="select-com"><img src="src/images/shop_down_arrow@2x.png"></span>
+						</dd>
+						<p id="checkDeta" >*日期格式不正确</p>
+					</dl>
 				</div>
 				<div class="account"><div class="account-btn" v-on:mousedown="submitInfo()" >保存</div></div>
 			</article>	
@@ -123,15 +127,21 @@
 		background: 0;
 		box-shadow: none;
 		font-size: 0.9rem;
+		background-color:#fff;
 	}
 	#personInfo .customer input{
-		font-size: 0.9rem;
+		font-size: 1rem!important;
+		padding-left:1rem;
 	}
 	#personInfo .customer dl{
 		background-color: #fff;
+		border-bottom:1px solid #e5e5e5;
+		margin:0 0.5rem;
+		height:2.8rem;
+		line-height:2.8rem;
 	}
 	#personInfo .customer dl.r-address{
-		margin-top: 0.67rem;
+		margin-top: 0;
 	}
 	#personInfo .member-name dd{
 		padding: 10px 0 0 15px;
@@ -184,7 +194,7 @@
 	#personInfo .customer dt {
 		margin-right: -100%;
 		float: left;
-		width: 80px;
+		width: 22%;
 		color: #000;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -194,6 +204,11 @@
 		margin: 1px -100% 0px 0;
 		overflow: hidden;
 		padding-right: 5px;
+		text-align:left;
+		padding-left:0.5rem;
+		font-size:1rem;
+		height:2.8rem;
+		line-height:2.8rem;
 	}
 	#personInfo .customer dd .inputRes{
 		height: 33px;
@@ -213,6 +228,16 @@
 	#personInfo .customer dd {
 		position: relative;
 		margin-left: 90px;
-		padding: 5px 0 5px 5px;
 	}	
+	.select-com{
+	    position: absolute;
+	    right: 0.8rem;
+	    top: 50%;
+	    margin-top: -0.23333333333333334rem;
+	    line-height: 0;
+	}
+	.select-com img{
+		width: 0.8333333333333334rem;
+		height: 0.4666666666666667rem;
+	}
 </style>

@@ -111,10 +111,10 @@
 	    border-radius: 9px;
 	    color: #fff;
 	    font-size: 0.9rem;
-	    margin-left: 80%;
+	    margin-left: 82%;
 	    background: url(../../images/member_whole_reply_img.png) no-repeat;
 	    background-size: 100%;		
-	    margin-top: 1rem;
+	    margin-top: 0.6rem;
 	}
 	.overflow{
 		overflow: hidden;
@@ -130,7 +130,6 @@
         }
         .nlyb_warp {
             margin-left: 27px;
-            margin-right: 5px
         }
         .ly_bottom {
             padding-bottom: 45px
@@ -164,19 +163,21 @@
         }
 
         .nlyb_bgstyle {
-            box-shadow: 0 0 1px #777 inset;
+            border-bottom:1px solid #e5e5e5;
             background: #fff;
             padding: 10px;
             position: relative;
+            padding-bottom:0.3rem;
+            padding-top:0.3rem;
         }
 
         .nlyb_name {
-            font-size: 12px;
+            font-size: 0.8rem;;
             color: #000
         }
 
         .nlyb_time {
-            font-size: 12px;
+            font-size: 0.8rem;
             color: #666;
             padding-left: 10px
         }
@@ -192,7 +193,7 @@
         }
 
         .nlyb_warp li {
-            margin-top: -1px
+            
         }
 
         .nlyb_box {
@@ -200,7 +201,8 @@
         }
 
         .nlyb_con {
-            color: #666
+            color: #666;
+            font-size:0.9rem;
         }
 
         .nlyb_adthree {
@@ -217,10 +219,11 @@
 
         .nlyb_admin {
             background: #f3f3f3;
-            font-size: 12px;
+            font-size: 0.8rem;
             padding: 5px;
-            margin: 10px 5px 5px 5px;
-            color: #666
+            margin: 10px 5px 5px 0;
+            color: #666;
+            position:relative;
         }
 
         .nlyb_star_2 {
@@ -359,18 +362,18 @@
         }
     #messageboard .mess-xinxin{
     	position: absolute;
-    	right: 1rem;
+    	right: 0.7rem;
 	}
 	#messageboard .mess-xinxin .order-xinxin{
 		display: inline-block;
 		margin: -0.26rem 0;
-		width: 1.2rem;
-		height: 1.2rem;
+		width: 1rem;
+		height: 1rem;
 		background: url(../../images/member_star_image@2x.png) no-repeat;
-		background-size: 1.2rem;
+		background-size: 1rem;
 	}
 	#messageboard .mess-xinxin em.active{
 		background: url(../../images/member_empty_star_img@2x.png) no-repeat;
-		background-size: 1.2rem;
+		background-size: 1rem;
 	}
 </style>

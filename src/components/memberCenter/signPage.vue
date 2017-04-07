@@ -16,8 +16,7 @@
 						<span class="hotel-page-next">{{pageList.pageNo==pageList.pageAll&&"已到尾页"||"下一页"}}</span>
 						<img src="../../images/life_next_pages_arrow@2x.png"/>
 					</div>
-				</div>				
-				<div class="hotel-copyright">Copyright @ 万达广场 版权所有</div>
+				</div>
 			</article>	
 		</section>
 	</div>
@@ -40,7 +39,8 @@
 		font-size: 0.8666666666666667rem;
 		text-align: center;
 		vertical-align: middle;
-		border: 1px solid #E5E5E5;
+		border-bottom: 1px solid #E5E5E5;
+		border-right: 1px solid #E5E5E5;
 	}
 	.sign-expalnt{
 		background-color: #F9F9F9;

@@ -113,34 +113,34 @@
     }
     
     .login-c .cy-nav .login-menberName>img {
-    	width: 1.4rem;
-    	height: 1.4rem;
+    	width: 1.6rem;
+    	height: 1.6rem;
     }
     
     .login-c .cy-nav .login-menberName input {
     	width: 80%;
-    	height: 3rem;
-    	font-size: 0.9333333333333333rem;
+    	height: 3.1rem;
+    	font-size: 1.1rem;
     	color: #666666;
     	padding: 0 0.6666666666666666rem;
     	border: none;
     }
     .login-c .cy-nav .login-now {
-    	margin-top: 2.5rem;
-    	height: 3.066666666666667rem;
-    	line-height: 3.066666666666667rem;
+    	margin-top: 3rem;
+    	height: 2.6rem;
+    	line-height: 2.6rem;
     	text-align: center;
     }
     .login-c .cy-nav .login-now .loginbut {
-    	height: 3.066666666666667rem;
+    	height: 2.6rem;
     	width: 10.866666666666667rem;
-    	line-height: 3.066666666666667rem;
+    	line-height: 2.6rem;
     	text-align: center;
     	border: 1px;
     	background: -ms-linear-gradient(left bottom, #ff9166, #ff5959);
     	background: -webkit-linear-gradient(left bottom, #ff9166, #ff5959);
     	background: -o-linear-gradient(left bottom, #ff9166, #ff5959);
-    	font-size: 1.0666666666666667rem;
+    	font-size: 1.2rem;
     	color: #FFFFFF;
     	border-radius: 46px;
     }

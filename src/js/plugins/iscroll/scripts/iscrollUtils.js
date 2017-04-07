@@ -235,7 +235,7 @@ function hScroller(options) {
     // 自动播放的时间
     options.autoTime = (options.autoScroll && options.autoTime) || 2000; // 自动滚动的间隔时间，单位毫秒，默认 2000
     options = $.extend(defaultOptions, options);
-    var scrollDirection = 0; // 滚动方向，1 从左到右滚动，-1 从右到左滚动，0 静止
+    var scrollDirection = 0,hScrollerTimer; // 滚动方向，1 从左到右滚动，-1 从右到左滚动，0 静止
     var $scroller = options.$wrapper.children();
     var myScroller = new IScroll(options.$wrapper[0], options);
     if (options.autoScroll) {

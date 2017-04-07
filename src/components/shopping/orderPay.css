@@ -6,14 +6,14 @@
 .c-order-commd ul li{
 	position: relative;
 	width: 100%;
-	height: 5rem;
+	height: 4rem;
 	border-bottom: 1px solid #E5E5E5;
 }
 .c-order-commd ul li > div{
 	float: left;
 }
 .c-order-commd ul li .order-c-img{
-	line-height: 5rem;
+	line-height: 4rem;
 	margin-left: 1.1333333333333333rem;
 	overflow: hidden;
 }
@@ -23,15 +23,15 @@
 	border-radius: 50%;
 }
 .c-order-commd ul li .order-c-cont{
-	padding: 0.8666666666666667rem;
+	padding: 0.6rem 0 0 0.5rem;
 }
 .c-order-commd ul li .order-cont-pace{
-	font-size: 1.4rem;
+	font-size: 1rem;
 	color: #333;
 	line-height: 1.5rem;
 }
 .c-order-commd ul li .order-cont-name{
-	font-size: 0.9333333333333333rem;
+	font-size: 1rem;
 	color: #303030;
 }
 .order-pay-money{
@@ -39,11 +39,12 @@
     height: 3.3333333333333335rem;
     line-height: 3.3333333333333335rem;
     text-align: right;
-    padding-right: 0.5rem;
-    font-size: 1.4rem;
+    padding-right: 1rem;
+    font-size: 1.1rem;
+    color: #e74c3c;
 }
 .order-pay-money > span{
-	color: #c46b22;
+	color: #e74c3c;
 }
 .pay-modes{
 	position: relative;
@@ -115,12 +116,12 @@
 	border: 0;
 }
 .pay-buttom{
-	margin: 1.7333333333333334rem 10%;
-	width: 80%;
+	margin: 1.7rem auto;
+	width: 90%;
 	height: 2.6666666666666665rem;
 	line-height: 2.6666666666666665rem;
 	background-color: #e74c3c;
-	border-radius: 10px;
+	border-radius: 0.3rem;
 	color: #fff;
 	font-size: 1rem;
 	text-align: center;

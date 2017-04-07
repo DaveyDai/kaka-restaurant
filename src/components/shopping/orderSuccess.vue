@@ -21,7 +21,7 @@
 		width: 100%;
 		height: 11.666666666666666rem;
 		font-size: 1.2rem;
-		color: #C94E3F;
+		color: #F7353C;
 	}
 	.order-ok-img > img{
 		width: 4.933333333333334rem;
@@ -33,7 +33,7 @@
 	}
 	.order-cz-back{
 		font-size: 1rem;
-		margin-top: 2rem;
+		margin-top: 3.5rem;
 	}
 	.order-cz-back > div{
 		display: inline-block;
@@ -41,17 +41,17 @@
 		height: 2.6666666666666665rem;
 		line-height: 2.6666666666666665rem;
 		border-radius:1.3rem;
-		border:1px solid #d0d0d0;
+		border:1px solid #efefef;
 	}
 	.order-cz-back .look-order{
 		background-color: #efefef;
 		margin: 0 1rem;
 		padding: 0 2.6666666666666665rem;
+		color:#666;
 	}
 	.order-cz-back .look-that{
 		background-color: #F7353C;
 		color: #fff;
-		border: 1px solid #F7353C;
 	}
 	.order-cz-back .shop-home-page{
 		background-color: #C94E3F;

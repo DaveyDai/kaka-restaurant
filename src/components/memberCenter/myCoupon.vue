@@ -1,5 +1,5 @@
 <template>
-	<div id="myCoupon" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
+	<div id="myCoupon" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;background-color:#e5e5e5;">
 		<section class="main fixed">
 			<article class="content">
 			   <div class="nav">
@@ -49,7 +49,7 @@
 						<div class="mycoupon-tr coupon-time">有效期至：2017年2月22日</div>
 					</li>
 				</div>
-				<div class="myCoupon-conter-no" style="display: block;">
+				<div class="myCoupon-conter-no" style="display: block;background-color:#fff;height:calc(100vh);">
 					<div class="content">
 						<ul class="">
 							<li>
@@ -148,7 +148,7 @@
 	    text-align:center;
 	    height:3rem;
 	    line-height:3rem;
-	    border-bottom:2px solid gainsboro;
+	    border-bottom:1px solid #e5e5e5;
 	    -webkit-flex:1;
 	    flex:1;
 	}

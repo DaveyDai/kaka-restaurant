@@ -16,19 +16,21 @@
 			</header>				
 			<article class="content">
 				<div class="c-hotel-tall">
-					<img src="../../images/home_notice@2x.png"/>
-					<span>{{notice.text}}</span>
+					<div class="hotel-tall-gd">
+						<img src="../../images/home_notice@2x.png"/>
+						<span v-text="notice.text"></span>						
+					</div>
 				</div>
-				<div class="c-hotel-centent" v-on:click="goAbout">
-					<div class="c-h-in c-h-img">
+				<div class="c-hotel-centent">
+					<div class="c-h-in c-h-img" v-on:click="goAbout">
 						<img v-bind:src="getimgUrl+storeInfo.logo"/>
 					</div>
 					<div class="c-h-in c-h-cent">
-						<div class="c-h-name">
+						<div class="c-h-name" v-on:click="goAbout">
 							<span v-text="storeInfo.name"></span>
 							<img src="../../images/home_right_arrow@2x.png"/>
 						</div>
-						<div class="c-h-yysj">
+						<div class="c-h-yysj" v-on:click="goAbout">
 							<span>营业时间:</span>
 							<span class="c-h-time" v-text="storeInfo.open_time+'-'+storeInfo.end_time"></span>
 						</div>
@@ -161,10 +163,12 @@
 		         this.$http.post(configuration.global.serverPath + "/api/Product/getShop",{shopid:configuration.global.shopid},{headers: {'Content-Type': 'application/x-www-form-urlencoded'},emulateJSON:true}).then(function (response) {
 		         	var results = response.data;
 		         	if(results.code === 200){
-		         		 this.storeInfo = results.data[0];
-		         		 document.title = this.storeInfo.name;
-		         		 sessionStorage.setItem("storeInfo",JSON.stringify(results.data[0]));
-		         		 this.isBusiness = this.timeCheck(results.data[0].open_time,results.data[0].end_time)
+		         		var storeInfos = results.data[0];
+		         		storeInfos.end_time = storeInfos.end_time || "22:00";
+		         		this.storeInfo = storeInfos;
+		         		document.title = this.storeInfo.name;
+		         		sessionStorage.setItem("storeInfo",JSON.stringify(results.data[0]));
+		         		this.isBusiness = this.timeCheck(results.data[0].open_time,results.data[0].end_time)
 		         	}else{
 		         		globalMethod.layerUtils.iAlert(results.message||"请求服务器失败");
 		         	}

@@ -1,5 +1,5 @@
 <template>
-	<div id="pointsChange" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
+	<div id="pointsChange" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;background-color:#e5e5e5;">
 		<div id="pointConter">  
 			<div class="point-nav" v-for="item in pointList">
 				<ul class="ul1">
@@ -37,7 +37,7 @@
 				</div>
 			</div>				
 		</div>
-		<div id="conterNo" style="display: none;">
+		<div id="conterNo" style="display: none;background-color:#fff;height:calc(100vh);">
 			<div class="content">
 				<li>
 					<img src="../../images/restaurant/none_coupons_img@2x.png" alt="" />

@@ -1,7 +1,7 @@
 <template>
 	<div id="orderAll" style="position: relative;height:calc(100vh - 3.26rem);overflow-x: hidden;overflow-y: auto;">
-		<section class="main fixed">
-			<div class="cy-content" id="has_orders" style="display: none;">
+		<section class="main fixed" style="background-color:e5e5e5;">
+			<div class="cy-content" id="has_orders" style="display: none;background-color:#e5e5e5;">
 				<ul>
 					<li v-for="item in orderList">
 						<div class="cy-order" v-on:click="orderDetail(item)">
@@ -30,7 +30,7 @@
 							<div class="cy-consume-content2">
 								<div class="cy-consume-content2-number3">下单时间：<span v-text="item.create_time"></span></div>
 								<div class="cy-consume-content2-number4">
-									<span class="bottom-money" v-text="'￥'+item.total"></span>
+									<span class="bottom-money"><em style="font-size: 1rem;color: #333;">合计：</em><em v-text="'￥'+item.total"></em></span>
 									<span @click="deleteOrder(item)" v-text="item.pay_status==0||item.pay_status==1?'取消订单':'删除订单'"></span>
 									<span class="input2" @click="payOrders(item)" v-if="item.pay_status==0||item.pay_status==1">立即支付</span>
 									<span class="input2" @click="choiceOrder(item)" v-if="item.pay_status==2||item.pay_status==3">再来一单</span>
@@ -51,7 +51,7 @@
 					</div>
 				</div>				
 			</div>	
-			<div id="no_order" class="order-no" style="display: none;">
+			<div id="no_order" class="order-no" style="display: none;height:calc(100vh);background-color:#fff;">
 				<div class="content">
 					<ul class="">
 						<li>
@@ -166,6 +166,7 @@
     display: flex;
     -webkit-align-items: center;
     align-items: center;
+    letter-spacing:0.03rem;
 }
 .cy-order .cy-li-img{
     margin: 0 0.6rem 0 0.8rem;
@@ -196,7 +197,7 @@
     display:flex;
     background-color:#f5f5f5;
     height:4.733333333333333rem;
-    margin-bottom: 6px;
+    margin-bottom: 0.2rem;
 }
 .cy-new .cy-new-content1{
     padding-left:0.8rem;
@@ -224,7 +225,7 @@
     right: 0.8rem;
     height:4.733333333333333rem;
     text-align:right;
-    font-size:0.7333333333333333rem;
+    font-size:0.85rem;
     color:#303030;
     padding-top:0.6666666666666666rem;
 
@@ -246,7 +247,7 @@
     display:flex;
 
     background:#fff;
-    margin-bottom: 1.4333333333333333rem;
+    margin-bottom: 0.5rem;
 }
 
 .cy-consume .cy-consume-content1 .cy-consume-content1-number{
@@ -289,11 +290,11 @@
     color:#FFFFFF;
 }
 .cy-consume-content2-number4 .bottom-money {
+	position: absolute;
+	left: 1rem;
 	font-size: 1.2rem;
 	color: #D5383E;
-	font-weight: 600;
 	border: 0;
-	padding-right: 6rem;
 }
 .order-no .content{
     width:100%;

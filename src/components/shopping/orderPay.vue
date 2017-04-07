@@ -7,8 +7,8 @@
 						<li v-for="item in orderPayList">
 							<div class="order-c-img"><img v-bind:src="getImgUrl+(item.image||storeInfo.logo)"/></div>
 							<div class="order-c-cont">
-								<div class="order-cont-pace">¥ {{item.price}}/份</div>
 								<div class="order-cont-name">{{item.product_name||item.name}}</div>
+								<div class="order-cont-pace">¥ {{item.price}}/份</div>
 							</div>
 							<div class="order-num">数量:  {{item.num+item.unit}}</div>
 							<!--<div class="commodity-choice comm-li-info">

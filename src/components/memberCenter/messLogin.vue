@@ -7,13 +7,13 @@
 				</div>				
 				<div class="pass-input" style="margin-top: 3rem;">
 					<div class="inputmess">
-						<span>手机号：</span>
+						<span>手机号</span>
 						<input type="text" name="phone" v-model="loginParam.phone" placeholder="请输入您的手机号" />
 					</div>
 				</div>
 				<div class="pass-input">
 					<div class="inputmess pass-name">
-						<span>验证码：</span>
+						<span>验证码</span>
 						<input type="tel" name="sms" v-model="loginParam.sms" placeholder="请输入短信验证码" />
 						<span class="l-login-get" v-on:mousedown="getPhoneMessage" >获取验证码</span>						
 					</div>
@@ -105,31 +105,31 @@
 		background-color: #fff;
 	}
 	.pass-input{
-		width: 84%;
 		height: auto;
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid #e5e5e5;
 		margin: 0 8%;
-		padding-top: 1rem;
-		padding-bottom: 0.16666666666666666rem;
+		padding-top: 1.5rem;
+		padding-bottom: 0.2rem;
 	}
 	.pass-input .inputmess > span{
-	    font-size: 1.1333333333333333rem;
+	    font-size: 1.2rem;
 	    color: #333;
-	    padding-left: 0.8rem;
+	    padding-left: 0.5rem;
 	}
 	.pass-input .inputmess > input{
 		margin-left: 0.5rem;
 		width: 68%;
-		height: 2.5rem;
-		font-size: 1rem;
+		height: 2rem;
+		line-height: 2rem;
+		font-size: 1.1rem;
 		color: #999;
 		border: 0;
 	}
 	.pass-input .pass-name > input{
 		margin-left: 0.5rem;
-		width: 40%;
+		width: 46%;
 		height: 2.5rem;
-		font-size: 1rem;
+		font-size: 1.1rem;
 		color: #999;
 		border: 0;
 	}
@@ -137,9 +137,10 @@
 	    display: inline-block;
 	    font-size: 0.93rem;
 	    background-color: #ff5959;
-	    padding: 0.5rem 0.8rem;
+	    padding: 0.5rem 0.7rem;
 	    border-radius: 1.5rem;
-	    color: #fff;		
+	    color: #fff;	
+	    float:right;	
 	}
 	.pass-input #checkEmail{
 		display: none;
@@ -147,9 +148,9 @@
 	}
 	.pass-go{
 	    width: 84%;
-	    line-height: 2.7rem;
+	    line-height: 2.6rem;
 	    margin: 8%;
-	    font-size: 1rem;		
+	    font-size: 1.2rem;		
 	}
 	.pass-go span{
 	    display: block;
@@ -159,6 +160,8 @@
 	.pass-go span.pass-goto{
 		background-color: #ff5959;
 		color: #ffffff;
+		height:2.7rem;
+		line-height:2.7rem;
 	}
 	.pass-go span.pass-back{
 		margin-top: 1.3333333333333333rem;
